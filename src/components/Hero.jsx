@@ -55,7 +55,7 @@ export default function Hero() {
             <span className="hero-tag">Halo, Selamat Datang</span>
             <h1 className="hero-title">
               Saya <span>Iklil Badar</span> <br />
-              <span style={{ fontSize: '2.5rem', background: 'none', WebkitTextFillColor: 'initial', color: 'var(--text-secondary)' }}>
+              <span className="hero-typing-text">
                 {currentText}
                 <span className="typing-cursor" style={{ color: 'var(--accent-blue)', animation: 'blink 0.7s infinite' }}>|</span>
               </span>

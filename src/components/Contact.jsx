@@ -38,6 +38,26 @@ const LinkedinIcon = ({ size = 24, className }) => (
   </svg>
 );
 
+const InstagramIcon = ({ size = 24, className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -57,14 +77,35 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission
-    setTimeout(() => {
+    
+    fetch("https://formsubmit.co/ajax/iklilbadar.dev@gmail.com", {
+      method: "POST",
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        Nama: formData.name,
+        Email: formData.email,
+        Subjek: formData.subject,
+        Pesan: formData.message
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        alert("Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.");
+      }
+    })
+    .catch(error => {
+      alert("Terjadi kesalahan jaringan. Silakan periksa koneksi Anda.");
+    })
+    .finally(() => {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1200);
+    });
   };
 
   return (
@@ -98,7 +139,7 @@ export default function Contact() {
               </div>
               <div className="contact-item-details">
                 <h4>Telepon / WhatsApp</h4>
-                <p>+62 812-3456-7890</p>
+                <p>+62 877-8239-0705</p>
               </div>
             </div>
 
@@ -108,21 +149,21 @@ export default function Contact() {
               </div>
               <div className="contact-item-details">
                 <h4>Lokasi</h4>
-                <p>SMKN 6 Jakarta, Kebayoran Baru, Jakarta Selatan</p>
+                <p>Pancoran, Jakarta Selatan</p>
               </div>
             </div>
 
             <div className="social-links-container" style={{ marginTop: '1rem' }}>
               <h4>Ikuti Saya</h4>
               <div className="social-links">
-                <a href="#" className="social-btn" aria-label="Github" onClick={(e) => e.preventDefault()}>
+                <a href="https://www.instagram.com/ikliladay/" className="social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                  <InstagramIcon size={20} />
+                </a>
+                <a href="https://github.com/adayy-iklil" className="social-btn" aria-label="Github" target="_blank" rel="noopener noreferrer">
                   <GithubIcon size={20} />
                 </a>
-                <a href="#" className="social-btn" aria-label="LinkedIn" onClick={(e) => e.preventDefault()}>
+                <a href="https://www.linkedin.com/in/iklil-badar-4729a8422/" className="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                   <LinkedinIcon size={20} />
-                </a>
-                <a href="#" className="social-btn" aria-label="WhatsApp" onClick={(e) => e.preventDefault()}>
-                  <MessageSquare size={20} />
                 </a>
               </div>
             </div>
