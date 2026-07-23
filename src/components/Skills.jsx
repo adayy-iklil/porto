@@ -9,8 +9,8 @@ export default function Skills() {
       skills: [
         { name: 'HTML & CSS / Responsive Design', level: 90 },
         { name: 'JavaScript (ES6+)', level: 80 },
-        { name: 'React.js Framework', level: 75 },
-        { name: 'UI/UX Design Basics', level: 70 },
+        { name: 'React.js Framework', level: 80 },
+        { name: 'UI/UX Design Basics', level: 90 },
       ]
     },
     {
@@ -18,9 +18,8 @@ export default function Skills() {
       icon: <Database size={20} />,
       skills: [
         { name: 'PHP / Laravel', level: 80 },
-        { name: 'MySQL / PostgreSQL / SQL Server', level: 85 },
-        { name: 'C# / Java (Aplikasi Desktop)', level: 75 },
-        { name: 'RESTful API Development', level: 70 },
+        { name: 'MySQL / SQL Server', level: 85 },
+        { name: 'C# (Aplikasi Desktop)', level: 85 },
       ]
     },
     {
@@ -30,7 +29,6 @@ export default function Skills() {
         { name: 'Git & GitHub Version Control', level: 85 },
         { name: 'Problem Solving & Logika Pemrograman', level: 80 },
         { name: 'Database Design (ERD, Normalisasi)', level: 85 },
-        { name: 'SDLC (Software Development Life Cycle)', level: 75 },
       ]
     }
   ];
@@ -42,7 +40,7 @@ export default function Skills() {
           <span className="section-subtitle">Keahlian Saya</span>
           <h2>Teknologi & Kemampuan</h2>
         </div>
-        
+
         <div className="skills-grid">
           {skillCategories.map((category, index) => (
             <div key={index} className="skills-category">
@@ -52,7 +50,7 @@ export default function Skills() {
                 </div>
                 <h3>{category.title}</h3>
               </div>
-              
+
               <div className="skills-list">
                 {category.skills.map((skill, sIndex) => (
                   <div key={sIndex} className="skill-item">
