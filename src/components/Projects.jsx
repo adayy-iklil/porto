@@ -23,11 +23,20 @@ const GithubIcon = ({ size = 24, className }) => (
 export default function Projects() {
   const projectsList = [
     {
+      title: 'Sistem Pendaftaran Prodjost Academy',
+      desc: 'Sistem informasi pendaftaran peserta kursus berbasis web yang dikembangkan menggunakan PHP Native dan basis data MySQL. Dilengkapi dengan pengelolaan CRUD (Create, Read, Update, Delete) data peserta.',
+      tech: ['PHP Native', 'MySQL', 'HTML5', 'CSS3', 'JavaScript'],
+      type: 'Web Application',
+      icon: <Globe size={40} style={{ color: 'var(--accent-blue)' }} />,
+      github: '#',
+      demo: 'https://prodjostlearning.xo.je/'
+    },
+    {
       title: 'Sistem Informasi Inventaris Barang',
       desc: 'Aplikasi manajemen stok barang gudang terintegrasi. Membantu petugas mencatat barang masuk, barang keluar, mengelola vendor, serta mencetak laporan bulanan secara otomatis.',
       tech: ['PHP', 'Laravel', 'MySQL', 'Bootstrap'],
       type: 'Web Application',
-      icon: <Globe size={40} style={{ color: 'var(--accent-blue)' }} />,
+      icon: <Cpu size={40} style={{ color: 'var(--accent-pink)' }} />,
       github: '#',
       demo: '#'
     },
@@ -37,15 +46,6 @@ export default function Projects() {
       tech: ['C#', '.NET Windows Forms', 'SQL Server', 'Crystal Reports'],
       type: 'Desktop Application',
       icon: <Terminal size={40} style={{ color: 'var(--accent-purple)' }} />,
-      github: '#',
-      demo: '#'
-    },
-    {
-      title: 'Prototype Platform E-Learning Sekolah',
-      desc: 'Sistem pembelajaran online interaktif untuk siswa dan guru. Dilengkapi dengan portal unduh materi belajar, ruang pengumpulan tugas siswa, modul kuis online, serta rekapitulasi nilai.',
-      tech: ['React.js', 'Node.js', 'Express', 'MySQL', 'TailwindCSS'],
-      type: 'Fullstack Web App',
-      icon: <Cpu size={40} style={{ color: 'var(--accent-pink)' }} />,
       github: '#',
       demo: '#'
     }
