@@ -99,9 +99,6 @@ export default function Projects() {
                 </div>
 
                 <div className="project-links">
-                  <a href={project.github} className="project-link" onClick={(e) => project.github === '#' && e.preventDefault()}>
-                    <GithubIcon size={16} /> Kode Sumber
-                  </a>
                   <a href={project.demo} className="project-link" onClick={(e) => project.demo === '#' && e.preventDefault()}>
                     <ExternalLink size={16} /> Demo Live
                   </a>
