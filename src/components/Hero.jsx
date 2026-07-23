@@ -3,7 +3,7 @@ import { ArrowRight, Code, Terminal, Database } from 'lucide-react';
 import avatar from '../assets/avatar.jpg';
 
 export default function Hero() {
-  const words = ['Software Developer', 'Siswa RPL SMKN 6 Jakarta', 'IT Enthusiast'];
+  const words = ['Software Developer', 'Siswa RPL SMKN 6 Jakarta', 'IT Software'];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -11,7 +11,7 @@ export default function Hero() {
 
   useEffect(() => {
     const activeWord = words[currentWordIndex];
-    
+
     const handleTyping = () => {
       if (!isDeleting) {
         // Typing
@@ -72,7 +72,7 @@ export default function Hero() {
               </button>
             </div>
           </div>
-          
+
           <div className="hero-image-outer">
             <div className="hero-image-wrapper">
               <div className="hero-image-glow"></div>
