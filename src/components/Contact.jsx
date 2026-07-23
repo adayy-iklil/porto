@@ -77,10 +77,10 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    fetch("https://formsubmit.co/ajax/iklilbadar.dev@gmail.com", {
+
+    fetch("https://formsubmit.co/ajax/badariklil6@gmail.com", {
       method: "POST",
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
@@ -91,21 +91,21 @@ export default function Contact() {
         Pesan: formData.message
       })
     })
-    .then(response => {
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        alert("Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.");
-      }
-    })
-    .catch(error => {
-      alert("Terjadi kesalahan jaringan. Silakan periksa koneksi Anda.");
-    })
-    .finally(() => {
-      setIsSubmitting(false);
-    });
+      .then(response => {
+        if (response.ok) {
+          setIsSubmitted(true);
+          setFormData({ name: '', email: '', subject: '', message: '' });
+          setTimeout(() => setIsSubmitted(false), 5000);
+        } else {
+          alert("Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.");
+        }
+      })
+      .catch(error => {
+        alert("Terjadi kesalahan jaringan. Silakan periksa koneksi Anda.");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
