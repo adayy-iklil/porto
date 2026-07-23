@@ -786,6 +786,10 @@ h2 {
     justify-content: center;
   }
   
+  .about-section, .skills-section, .projects-section, .contact-section {
+    padding: 80px 0;
+  }
+  
   .about-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -795,12 +799,14 @@ h2 {
     grid-template-columns: 1fr;
     max-width: 600px;
     margin: 0 auto;
+    gap: 1.5rem;
   }
   
   .projects-grid {
     grid-template-columns: 1fr;
     max-width: 600px;
     margin: 0 auto;
+    gap: 2rem;
   }
   
   .contact-grid {
@@ -821,26 +827,37 @@ h2 {
   }
   
   .nav-links {
-    display: none;
+    display: flex;
     position: absolute;
     top: 80px;
     left: 0;
     width: 100%;
     background: rgba(8, 8, 16, 0.95);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--glass-border);
     flex-direction: column;
-    padding: 2rem;
+    padding: 0 2rem;
     gap: 1.5rem;
     text-align: center;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.4s ease;
   }
   
   .nav-links.active {
-    display: flex;
+    max-height: 400px;
+    opacity: 1;
+    padding: 2rem;
   }
   
   .nav-toggle {
     display: block;
+  }
+  
+  .about-section, .skills-section, .projects-section, .contact-section {
+    padding: 60px 0;
   }
   
   .about-card {
@@ -849,6 +866,14 @@ h2 {
   
   .about-meta {
     grid-template-columns: 1fr;
+  }
+  
+  .skills-category {
+    padding: 1.5rem;
+  }
+  
+  .project-content {
+    padding: 1.5rem;
   }
   
   .contact-form {
@@ -861,3 +886,57 @@ h2 {
     text-align: center;
   }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-title span {
+    font-size: 1.8rem !important;
+  }
+  
+  .hero-desc {
+    font-size: 0.95rem;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .hero-ctas {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  
+  .hero-ctas .btn {
+    width: 100%;
+  }
+  
+  .about-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .project-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .project-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+

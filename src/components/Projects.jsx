@@ -23,31 +23,22 @@ const GithubIcon = ({ size = 24, className }) => (
 export default function Projects() {
   const projectsList = [
     {
-      title: 'Sistem Pendaftaran Prodjost Academy',
-      desc: 'Sistem informasi pendaftaran peserta kursus berbasis web yang dikembangkan menggunakan PHP Native dan basis data MySQL. Dilengkapi dengan pengelolaan CRUD (Create, Read, Update, Delete) data peserta.',
-      tech: ['PHP Native', 'MySQL', 'HTML5', 'CSS3', 'JavaScript'],
-      type: 'Web Application',
+      title: 'Ace Energy Service',
+      desc: 'Website profil perusahaan resmi penyedia solusi energi terbarukan khususnya pemasangan solar panel (Pembangkit Listrik Tenaga Surya). Menampilkan keunggulan produk panel surya, estimasi penghematan listrik, jenis layanan instalasi, serta portfolio proyek pengerjaan.',
+      tech: ['React.js', 'Vanilla CSS', 'Responsive Design', 'UI/UX'],
+      type: 'Company Profile',
       icon: <Globe size={40} style={{ color: 'var(--accent-blue)' }} />,
       github: '#',
-      demo: 'https://prodjostlearning.xo.je/'
+      demo: 'https://aceenergyservice.com'
     },
     {
-      title: 'Sistem Informasi Inventaris Barang',
-      desc: 'Aplikasi manajemen stok barang gudang terintegrasi. Membantu petugas mencatat barang masuk, barang keluar, mengelola vendor, serta mencetak laporan bulanan secara otomatis.',
-      tech: ['PHP', 'Laravel', 'MySQL', 'Bootstrap'],
+      title: 'Sistem Pendaftaran Prodjost Academy',
+      desc: 'Sistem informasi pendaftaran peserta kursus berbasis web yang dikembangkan menggunakan PHP Native dan basis data MySQL. Dilengkapi dengan pengelolaan CRUD (Create, Read, Update, Delete) data peserta secara dinamis.',
+      tech: ['PHP Native', 'MySQL', 'HTML5', 'CSS3', 'JavaScript'],
       type: 'Web Application',
       icon: <Cpu size={40} style={{ color: 'var(--accent-pink)' }} />,
       github: '#',
-      demo: '#'
-    },
-    {
-      title: 'Aplikasi Kasir Toko Retail (POS)',
-      desc: 'Aplikasi desktop kasir point-of-sale untuk mengelola transaksi penjualan harian. Mendukung scan barcode, manajemen data produk, pencetakan struk belanja, dan kalkulasi kembalian.',
-      tech: ['C#', '.NET Windows Forms', 'SQL Server', 'Crystal Reports'],
-      type: 'Desktop Application',
-      icon: <Terminal size={40} style={{ color: 'var(--accent-purple)' }} />,
-      github: '#',
-      demo: '#'
+      demo: 'https://prodjostlearning.xo.je/'
     }
   ];
 
