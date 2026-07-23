@@ -8,7 +8,7 @@ export default function Skills() {
       icon: <Code size={20} />,
       skills: [
         { name: 'HTML & CSS / Responsive Design', level: 90 },
-        { name: 'JavaScript (ES6+)', level: 80 },
+        { name: 'JavaScript', level: 80 },
         { name: 'React.js Framework', level: 80 },
         { name: 'UI/UX Design Basics', level: 90 },
       ]
