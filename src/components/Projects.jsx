@@ -28,6 +28,7 @@ export default function Projects() {
       tech: ['React.js', 'Vanilla CSS', 'Responsive Design', 'UI/UX'],
       type: 'Company Profile',
       icon: <Globe size={40} style={{ color: 'var(--accent-blue)' }} />,
+      image: '/ace.png',
       github: '#',
       demo: 'https://aceenergyservice.com'
     },
@@ -37,6 +38,7 @@ export default function Projects() {
       tech: ['PHP Native', 'MySQL', 'HTML5', 'CSS3', 'JavaScript'],
       type: 'Web Application',
       icon: <Cpu size={40} style={{ color: 'var(--accent-pink)' }} />,
+      image: '/prodjost.png',
       github: '#',
       demo: 'https://prodjostlearning.xo.je/'
     }
@@ -49,13 +51,28 @@ export default function Projects() {
           <span className="section-subtitle">Karya Saya</span>
           <h2>Proyek yang Pernah Dikembangkan</h2>
         </div>
-        
+
         <div className="projects-grid">
           {projectsList.map((project, index) => (
             <div key={index} className="project-card">
               <div className="project-media">
                 <div className="project-glow-overlay"></div>
-                {project.icon}
+                {project.image && (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="project-img"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      // Make the fallback icon visible again
+                      const fallback = e.target.parentElement.querySelector('.project-fallback-icon');
+                      if (fallback) fallback.style.opacity = '1';
+                    }}
+                  />
+                )}
+                <div className="project-fallback-icon" style={{ opacity: project.image ? 0 : 1, transition: 'opacity 0.3s ease', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'absolute', zIndex: 0 }}>
+                  {project.icon}
+                </div>
                 <span style={{
                   position: 'absolute',
                   top: '16px',
@@ -66,22 +83,23 @@ export default function Projects() {
                   padding: '4px 10px',
                   borderRadius: '30px',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  zIndex: 2
                 }}>
                   {project.type}
                 </span>
               </div>
-              
+
               <div className="project-content">
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-desc">{project.desc}</p>
-                
+
                 <div className="project-tags">
                   {project.tech.map((t, tIndex) => (
                     <span key={tIndex} className="project-tag">{t}</span>
                   ))}
                 </div>
-                
+
                 <div className="project-links">
                   <a href={project.github} className="project-link" onClick={(e) => project.github === '#' && e.preventDefault()}>
                     <GithubIcon size={16} /> Kode Sumber
