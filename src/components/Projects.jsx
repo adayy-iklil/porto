@@ -24,12 +24,11 @@ export default function Projects() {
   const projectsList = [
     {
       title: 'Ace Energy Service',
-      desc: 'Website profil perusahaan resmi penyedia solusi energi terbarukan khususnya pemasangan solar panel (Pembangkit Listrik Tenaga Surya). Menampilkan keunggulan produk panel surya, estimasi penghematan listrik, jenis layanan instalasi, serta portfolio proyek pengerjaan.',
+      desc: 'PT. ACE ENERGY SERVICE menyediakan solusi PV surya kelas dunia — dari EPC hingga O&M — untuk masa depan yang berkelanjutan. Website profil perusahaan ini menampilkan keunggulan produk, estimasi penghematan listrik, layanan instalasi, serta portofolio proyek pengerjaan.',
       tech: ['React.js', 'Vanilla CSS', 'Responsive Design', 'UI/UX'],
       type: 'Company Profile',
       icon: <Globe size={40} style={{ color: 'var(--accent-blue)' }} />,
       image: '/ace.png',
-      github: '#',
       demo: 'https://aceenergyservice.com'
     },
     {
@@ -39,7 +38,6 @@ export default function Projects() {
       type: 'Web Application',
       icon: <Cpu size={40} style={{ color: 'var(--accent-pink)' }} />,
       image: '/prodjost.png',
-      github: '#',
       demo: 'https://prodjostlearning.xo.je/'
     }
   ];
