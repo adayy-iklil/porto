@@ -48,11 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Smooth Scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        const targetElement = document.getElementById(targetId.substring(1));
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     });
   });
@@ -93,6 +95,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     type();
+  }
+
+  // CV Modal Management
+  const cvModal = document.getElementById('cv-modal');
+  const closeCvModalBtn = document.getElementById('close-cv-modal');
+  const printCvBtn = document.getElementById('print-cv-btn');
+
+  const cvButtons = ['open-cv-btn', 'open-cv-nav', 'open-cv-about'];
+  cvButtons.forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (cvModal) cvModal.classList.add('active');
+      });
+    }
+  });
+
+  if (closeCvModalBtn && cvModal) {
+    closeCvModalBtn.addEventListener('click', () => {
+      cvModal.classList.remove('active');
+    });
+  }
+
+  if (cvModal) {
+    cvModal.addEventListener('click', (e) => {
+      if (e.target === cvModal) {
+        cvModal.classList.remove('active');
+      }
+    });
+  }
+
+  if (printCvBtn) {
+    printCvBtn.addEventListener('click', () => {
+      window.print();
+    });
   }
 
   // Contact Form Handling (FormSubmit.co AJAX)

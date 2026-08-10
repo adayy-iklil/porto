@@ -61,6 +61,9 @@
             <a href="#contact" class="btn btn-primary">
               Hubungi Saya <i data-lucide="arrow-right"></i>
             </a>
+            <button id="open-cv-btn" class="btn btn-secondary">
+              <i data-lucide="file-text"></i> Lihat CV Saya
+            </button>
             <a href="#projects" class="btn btn-secondary">
               Lihat Proyek
             </a>
@@ -100,6 +103,11 @@
             <p>
               Saya memiliki kemampuan pemecahan masalah (problem solving) yang baik, terbiasa berpikir logis, dan sangat bersemangat untuk terus belajar hal baru. Saat ini, saya siap berkontribusi secara aktif sebagai peserta magang di bidang IT.
             </p>
+            <div style="margin-top: 1.5rem;">
+              <button id="open-cv-about" class="btn btn-primary">
+                <i data-lucide="file-text"></i> Baca Curriculum Vitae (CV)
+              </button>
+            </div>
           </div>
           
           <div class="about-meta">
@@ -461,6 +469,96 @@
       <p style="font-size: 0.85rem; color: var(--text-secondary);">Designed & Built with HTML, CSS & JavaScript</p>
     </div>
   </footer>
+
+  <!-- Modal CV Overlay -->
+  <div id="cv-modal" class="cv-modal-overlay">
+    <div class="cv-modal-box">
+      <div class="cv-modal-header">
+        <h3><i data-lucide="file-text" style="color: var(--accent-blue); vertical-align: middle;"></i> Curriculum Vitae — Iklil Badar</h3>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="print-cv-btn" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;"><i data-lucide="printer"></i> Cetak / PDF</button>
+          <button id="close-cv-modal" class="cv-close-btn">&times;</button>
+        </div>
+      </div>
+      <div class="cv-modal-body" id="printable-cv-content">
+        <div class="cv-paper">
+          <div class="cv-paper-header">
+            <h1>Iklil Badar</h1>
+            <p>Jakarta Selatan | badariklil6@gmail.com | +62 877-8239-0705</p>
+          </div>
+
+          <div class="cv-paper-section">
+            <h3>RINGKASAN PROFIL</h3>
+            <p>Siswa RPL (Rekayasa Perangkat Lunak) yang memiliki minat di bidang Software Development dan Teknologi Informasi. Berpengalaman mengembangkan website, aplikasi desktop, dan sistem berbasis database melalui berbagai proyek. Memahami dasar software development, database.</p>
+          </div>
+
+          <div class="cv-paper-section">
+            <h3>PENDIDIKAN</h3>
+            <strong>SMK Negeri 6 Jakarta ( 2024 – Sekarang )</strong>
+            <p style="margin-bottom: 4px;">RPL (Rekayasa Perangkat Lunak)</p>
+            <ul>
+              <li>Mempelajari pemrograman web dan basis data</li>
+              <li>Mengembangkan aplikasi berbasis web menggunakan HTML, CSS, JavaScript, PHP, dan MySQL.</li>
+            </ul>
+          </div>
+
+          <div class="cv-paper-section">
+            <h3>PENGALAMAN & PROJEK</h3>
+            <div style="margin-bottom: 10px;">
+              <strong>Front-End Web Developer – PT. Ace Service Energy</strong> <span style="float: right;">Jun – Jul 2026</span>
+              <ul>
+                <li>Membangun antarmuka pengguna (UI) responsif menggunakan React.js untuk website panel surya.</li>
+                <li>Berkolaborasi dalam tim menggunakan GitHub untuk mengembangkan fitur Front-End dan integrasi formulir layanan.</li>
+                <li>Mengoptimalkan performa dan pengalaman pengguna pada website.</li>
+              </ul>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+              <strong>Laravel Workshop</strong> <span style="float: right;">Okt 2025</span>
+              <ul>
+                <li>Mempelajari dasar framework Laravel.</li>
+                <li>Membuat aplikasi web sederhana menggunakan Laravel.</li>
+                <li>Memahami konsep MVC dan integrasi database MySQL.</li>
+              </ul>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+              <strong>AI Workshop – Merkle</strong> <span style="float: right;">Jun 2026</span>
+              <ul>
+                <li>Mengikuti pelatihan mengenai dasar-dasar Artificial Intelligence.</li>
+                <li>Mempelajari penerapan AI dalam pengembangan teknologi.</li>
+                <li>Berpartisipasi dalam praktik penggunaan tools berbasis AI.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="cv-paper-section">
+            <h3>SKILLS</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <strong>KEMAMPUAN TEKNIS</strong>
+                <ul>
+                  <li><strong>Bahasa Pemrograman:</strong> HTML, CSS, JS, PHP, Python, MySQL, C#</li>
+                  <li><strong>Editor code & IDE:</strong> VS Code, Visual Studio, Antigravity IDE</li>
+                  <li><strong>Framework & Version Control:</strong> Laravel, React, Git & GitHub</li>
+                  <li><strong>Game Engines:</strong> Godot, Unity</li>
+                  <li><strong>Desain UI/UX & Visual:</strong> Figma, Canva</li>
+                </ul>
+              </div>
+              <div>
+                <strong>KEMAMPUAN PERSONAL</strong>
+                <ul>
+                  <li>Berpikir Analitis & Penyelesaian Masalah</li>
+                  <li>Kolaborasi Tim & Adaptabilitas</li>
+                  <li>Adaptasi Teknologi & Tren Baru</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Script JS -->
   <script src="js/script.js"></script>
