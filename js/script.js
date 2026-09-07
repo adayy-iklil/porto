@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Smooth Scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
       const targetId = this.getAttribute('href');
       if (targetId && targetId !== '#') {
         const targetElement = document.getElementById(targetId.substring(1));
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Hero Typing Effect Animation
   const typingElement = document.getElementById('typing-text');
   if (typingElement) {
-    const words = ['Software Developer', 'Siswa RPL SMKN 6 Jakarta', 'IT Software'];
+    const words = ['Junior Web Developer', 'Siswa RPL SMKN 6 Jakarta', 'IT Software'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -161,27 +161,27 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify(formData)
       })
-      .then(response => {
-        if (response.ok) {
-          if (formSuccess) formSuccess.style.display = 'block';
-          contactForm.reset();
-          setTimeout(() => {
-            if (formSuccess) formSuccess.style.display = 'none';
-          }, 5000);
-        } else {
-          alert('Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
-        }
-      })
-      .catch(error => {
-        alert('Terjadi kesalahan jaringan. Silakan periksa koneksi Anda.');
-      })
-      .finally(() => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = 'Kirim Pesan <i data-lucide="send" class="w-4 h-4"></i>';
-          if (window.lucide) lucide.createIcons();
-        }
-      });
+        .then(response => {
+          if (response.ok) {
+            if (formSuccess) formSuccess.style.display = 'block';
+            contactForm.reset();
+            setTimeout(() => {
+              if (formSuccess) formSuccess.style.display = 'none';
+            }, 5000);
+          } else {
+            alert('Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
+          }
+        })
+        .catch(error => {
+          alert('Terjadi kesalahan jaringan. Silakan periksa koneksi Anda.');
+        })
+        .finally(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Kirim Pesan <i data-lucide="send" class="w-4 h-4"></i>';
+            if (window.lucide) lucide.createIcons();
+          }
+        });
     });
   }
 });
