@@ -13,11 +13,11 @@ export default function CvModal({ isOpen, onClose }) {
       <div className="cv-modal-box" onClick={(e) => e.stopPropagation()}>
         <div className="cv-modal-header">
           <h3>
-            <FileText className="w-5 h-5 inline mr-2" style={{ color: 'var(--accent-blue)', verticalAlign: 'middle' }} /> 
+            <FileText className="w-5 h-5 inline mr-2 cv-header-icon" /> 
             Curriculum Vitae — Iklil Badar
           </h3>
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <button id="print-cv-btn" onClick={handlePrint} className="btn btn-secondary" style={{ padding: '6px 14px', fontSize: '0.85rem' }}>
+          <div className="cv-modal-actions">
+            <button id="print-cv-btn" onClick={handlePrint} className="btn btn-secondary btn-print">
               <Printer className="w-4 h-4 mr-1 inline" /> Cetak / PDF
             </button>
             <button id="close-cv-modal" onClick={onClose} className="cv-close-btn">&times;</button>
@@ -39,7 +39,7 @@ export default function CvModal({ isOpen, onClose }) {
             <div className="cv-paper-section">
               <h3>PENDIDIKAN</h3>
               <strong>SMK Negeri 6 Jakarta ( 2024 – Sekarang )</strong>
-              <p style={{ marginBottom: '4px' }}>RPL (Rekayasa Perangkat Lunak)</p>
+              <p className="cv-sub">RPL (Rekayasa Perangkat Lunak)</p>
               <ul>
                 <li>Mempelajari pemrograman web dan basis data</li>
                 <li>Mengembangkan aplikasi berbasis web menggunakan HTML, CSS, JavaScript, PHP, dan MySQL.</li>
@@ -48,8 +48,11 @@ export default function CvModal({ isOpen, onClose }) {
 
             <div className="cv-paper-section">
               <h3>PENGALAMAN & PROJEK</h3>
-              <div style={{ marginBottom: '10px' }}>
-                <strong>Front-End Web Developer – PT. Ace Service Energy</strong> <span style={{ float: 'right' }}>Jun – Jul 2026</span>
+              <div className="cv-job-item">
+                <div className="cv-job-title-row">
+                  <strong>Front-End Web Developer – PT. Ace Service Energy</strong>
+                  <span className="cv-date">Jun – Jul 2026</span>
+                </div>
                 <ul>
                   <li>Membangun antarmuka pengguna (UI) responsif menggunakan React.js untuk website panel surya.</li>
                   <li>Berkolaborasi dalam tim menggunakan GitHub untuk mengembangkan fitur Front-End dan integrasi formulir layanan.</li>
@@ -57,8 +60,11 @@ export default function CvModal({ isOpen, onClose }) {
                 </ul>
               </div>
 
-              <div style={{ marginBottom: '10px' }}>
-                <strong>Laravel Workshop</strong> <span style={{ float: 'right' }}>Okt 2025</span>
+              <div className="cv-job-item">
+                <div className="cv-job-title-row">
+                  <strong>Laravel Workshop</strong>
+                  <span className="cv-date">Okt 2025</span>
+                </div>
                 <ul>
                   <li>Mempelajari dasar framework Laravel.</li>
                   <li>Membuat aplikasi web sederhana menggunakan Laravel.</li>
@@ -66,8 +72,11 @@ export default function CvModal({ isOpen, onClose }) {
                 </ul>
               </div>
 
-              <div style={{ marginBottom: '10px' }}>
-                <strong>AI Workshop – Merkle</strong> <span style={{ float: 'right' }}>Jun 2026</span>
+              <div className="cv-job-item">
+                <div className="cv-job-title-row">
+                  <strong>AI Workshop – Merkle</strong>
+                  <span className="cv-date">Jun 2026</span>
+                </div>
                 <ul>
                   <li>Mengikuti pelatihan mengenai dasar-dasar Artificial Intelligence.</li>
                   <li>Mempelajari penerapan AI dalam pengembangan teknologi.</li>
@@ -78,7 +87,7 @@ export default function CvModal({ isOpen, onClose }) {
 
             <div className="cv-paper-section">
               <h3>SKILLS</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="cv-skills-grid">
                 <div>
                   <strong>KEMAMPUAN TEKNIS</strong>
                   <ul>

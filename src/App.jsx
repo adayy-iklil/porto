@@ -15,12 +15,12 @@ export default function App() {
   const closeCv = () => setIsCvOpen(false);
 
   return (
-    <div>
+    <div className="portfolio-app">
       {/* Ambient Glow Effects */}
       <div className="bg-glow bg-glow-1"></div>
       <div className="bg-glow bg-glow-2"></div>
 
-      <Navbar />
+      <Navbar onOpenCv={openCv} />
 
       <main>
         <Hero onOpenCv={openCv} />

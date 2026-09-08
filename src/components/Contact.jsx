@@ -57,7 +57,7 @@ export default function Contact() {
         <div className="contact-grid">
           <div className="contact-info">
             <h3>Peluang Magang & Kolaborasi</h3>
-            <p style={{ color: 'var(--text-secondary)' }}>
+            <p className="contact-lead-desc">
               Saya sangat tertarik dengan tawaran magang, kerja sama proyek web/software, atau diskusi seru mengenai dunia IT. Silakan hubungi saya melalui form atau kontak di bawah ini.
             </p>
 
@@ -91,7 +91,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="social-links-container" style={{ marginTop: '1rem' }}>
+            <div className="social-links-container">
               <h4>Ikuti Saya</h4>
               <div className="social-links">
                 <a 
@@ -197,7 +197,7 @@ export default function Contact() {
               />
             </div>
 
-            <button id="submit-btn" type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ width: '100%' }}>
+            <button id="submit-btn" type="submit" disabled={isSubmitting} className="btn btn-primary btn-submit">
               {isSubmitting ? 'Mengirim...' : (
                 <>
                   Kirim Pesan <Send className="w-4 h-4 ml-1 inline" />

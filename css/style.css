@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Color Palette */
+  /* Color Palette - Dark Theme */
   --bg-primary: #080810;
   --bg-secondary: #0f0f23;
   --accent-blue: #00d2ff;
@@ -16,6 +16,12 @@
   --font-heading: 'Outfit', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
   /* Layout Options */
   scroll-behavior: smooth;
 }
@@ -26,12 +32,30 @@
   padding: 0;
 }
 
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+.portfolio-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  position: relative;
+}
+
+main {
+  flex: 1;
 }
 
 /* Background Gradients */
@@ -110,150 +134,7 @@ h2 {
   display: block;
 }
 
-/* Navbar */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background: rgba(8, 8, 16, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--glass-border);
-  transition: all 0.3s ease;
-}
-
-.navbar.scrolled {
-  background: rgba(8, 8, 16, 0.9);
-  padding: 10px 0;
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-}
-
-.nav-logo {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  text-decoration: none;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  list-style: none;
-}
-
-.nav-link {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  cursor: pointer;
-  position: relative;
-}
-
-.nav-link:hover {
-  color: var(--text-primary);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  cursor: pointer;
-}
-
-/* Hero Section */
-.hero-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding-top: 80px;
-  position: relative;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.hero-tag {
-  display: inline-block;
-  padding: 6px 16px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 30px;
-  color: var(--accent-blue);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  margin-bottom: 1.5rem;
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-}
-
-.hero-title span {
-  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero-typing-text {
-  font-size: 2.5rem;
-  background: none;
-  -webkit-text-fill-color: initial;
-  color: var(--text-secondary);
-  display: inline-block;
-  line-height: 1.2;
-}
-
-.hero-desc {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  margin-bottom: 2.5rem;
-  max-width: 600px;
-}
-
-.hero-ctas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -267,6 +148,7 @@ h2 {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -292,6 +174,300 @@ h2 {
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--glass-hover-border);
   transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--glass-hover-border);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Desktop Top Navbar with Liquid Glass Sliding Pill Indicator
+   ========================================================================== */
+.navbar-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 900;
+  background: rgba(8, 8, 16, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.navbar-header.scrolled {
+  background: rgba(8, 8, 16, 0.92);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 76px;
+}
+
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  position: relative;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  list-style: none;
+  background: rgba(15, 15, 35, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 5px 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+}
+
+/* Dark Theme Liquid Glass Sliding Pill (Desktop) */
+.nav-sliding-glass-pill {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(0, 210, 255, 0.25), rgba(121, 40, 202, 0.32));
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(0, 210, 255, 0.6);
+  box-shadow: 0 4px 18px rgba(0, 210, 255, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.65);
+  transition: transform 520ms cubic-bezier(0.18, 1, 0.32, 1), width 520ms cubic-bezier(0.18, 1, 0.32, 1), opacity 250ms ease;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, width;
+}
+
+.nav-item {
+  position: relative;
+  z-index: 2;
+  list-style: none;
+}
+
+.nav-link {
+  position: relative;
+  z-index: 2;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  transition: color 0.35s ease, text-shadow 0.35s ease;
+  cursor: pointer;
+  display: block;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
+  background: transparent;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   Mobile Floating Bottom Pill Navigation with Liquid Glass Transition
+   ========================================================================== */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(12, 12, 28, 0.88);
+  backdrop-filter: blur(30px) saturate(210%);
+  -webkit-backdrop-filter: blur(30px) saturate(210%);
+  padding: 5px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 24px rgba(0, 210, 255, 0.2);
+  max-width: calc(100% - 20px);
+  width: auto;
+  touch-action: pan-x;
+}
+
+.mobile-bottom-nav-links {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Dark Theme Liquid Glass Sliding Pill (Mobile) */
+.mobile-sliding-glass-pill {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 0;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(0, 210, 255, 0.3), rgba(121, 40, 202, 0.38));
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(0, 210, 255, 0.65);
+  box-shadow: 0 4px 20px rgba(0, 210, 255, 0.45), inset 0 1px 1.5px rgba(255, 255, 255, 0.7);
+  transition: transform 520ms cubic-bezier(0.18, 1, 0.32, 1), width 520ms cubic-bezier(0.18, 1, 0.32, 1), opacity 250ms ease;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, width;
+}
+
+.mobile-nav-item {
+  position: relative;
+  z-index: 2;
+  list-style: none;
+}
+
+.mobile-bottom-nav-link {
+  position: relative;
+  z-index: 2;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 7px 11px;
+  border-radius: var(--radius-full);
+  transition: color 0.35s ease, text-shadow 0.35s ease;
+  display: block;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-bottom-nav-link:hover,
+.mobile-bottom-nav-link.active {
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
+  background-color: transparent;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 60px;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  color: var(--accent-blue);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.hero-name {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-role {
+  font-size: 2.25rem;
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--text-secondary);
+  display: block;
+  line-height: 1.25;
+  margin-top: 0.25rem;
+}
+
+.typing-cursor {
+  display: inline-block;
+  color: var(--accent-blue);
+  animation: cursor-blink 0.7s infinite;
+  font-weight: 300;
+  margin-left: 2px;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero-image-outer {
+  display: flex;
+  justify-content: center;
 }
 
 .hero-image-wrapper {
@@ -343,7 +519,9 @@ h2 {
   100% { transform: scale(1.02); opacity: 0.8; }
 }
 
-/* About Section */
+/* ==========================================================================
+   About Section
+   ========================================================================== */
 .about-section {
   padding: 100px 0;
   position: relative;
@@ -374,6 +552,10 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
+.about-bio-cta {
+  margin-top: 1.5rem;
+}
+
 .about-meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -394,6 +576,19 @@ h2 {
   transform: translateY(-2px);
 }
 
+.meta-item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.meta-icon {
+  color: var(--accent-blue);
+  width: 20px;
+  height: 20px;
+}
+
 .meta-label {
   display: block;
   font-size: 0.8rem;
@@ -408,7 +603,14 @@ h2 {
   font-size: 1rem;
 }
 
-/* Skills Section */
+.meta-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Skills Section
+   ========================================================================== */
 .skills-section {
   padding: 100px 0;
   position: relative;
@@ -481,7 +683,9 @@ h2 {
   font-weight: 500;
 }
 
-/* Projects Section */
+/* ==========================================================================
+   Projects Section
+   ========================================================================== */
 .projects-section {
   padding: 100px 0;
   position: relative;
@@ -544,18 +748,19 @@ h2 {
   transform: scale(1.05);
 }
 
-.project-glow-overlay {
+.project-type-badge {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: var(--accent-blue);
-  filter: blur(40px);
-  opacity: 0.25;
-  pointer-events: none;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+  color: #ffffff;
+  z-index: 3;
 }
 
 .project-content {
@@ -563,6 +768,25 @@ h2 {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+.project-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.project-index {
+  font-size: 0.8rem;
+  color: var(--accent-blue);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.project-category {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
 }
 
 .project-title {
@@ -616,7 +840,9 @@ h2 {
   color: var(--accent-blue);
 }
 
-/* Contact Section */
+/* ==========================================================================
+   Contact Section
+   ========================================================================== */
 .contact-section {
   padding: 100px 0;
   position: relative;
@@ -632,6 +858,12 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+.contact-lead-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 .contact-item {
@@ -666,10 +898,14 @@ h2 {
   color: var(--text-primary);
 }
 
+.social-links-container {
+  margin-top: 1rem;
+}
+
 .social-links {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .social-btn {
@@ -719,7 +955,7 @@ h2 {
 
 .form-group input,
 .form-group textarea {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.25);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
   padding: 12px 16px;
@@ -733,12 +969,16 @@ h2 {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--accent-blue);
-  box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
 }
 
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+.btn-submit {
+  width: 100%;
 }
 
 .form-success-msg {
@@ -751,7 +991,9 @@ h2 {
   text-align: center;
 }
 
-/* Footer */
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 .footer {
   border-top: 1px solid var(--glass-border);
   padding: 40px 0;
@@ -764,12 +1006,23 @@ h2 {
   align-items: center;
 }
 
-.footer p {
+.footer-copyright {
   color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
-/* Modal CV Styling */
+.footer-socials {
+  margin: 0;
+}
+
+.footer-built {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Modal CV Styling
+   ========================================================================== */
 .cv-modal-overlay {
   position: fixed;
   inset: 0;
@@ -810,11 +1063,30 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
 .cv-modal-header h3 {
   font-size: 1.15rem;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.cv-header-icon {
+  color: var(--accent-blue);
+  vertical-align: middle;
+}
+
+.cv-modal-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-print {
+  padding: 6px 14px;
+  font-size: 0.85rem;
 }
 
 .cv-close-btn {
@@ -875,10 +1147,38 @@ h2 {
   margin-bottom: 10px;
 }
 
+.cv-sub {
+  font-size: 0.88rem;
+  color: #475569;
+  margin-bottom: 4px;
+}
+
 .cv-paper-section ul {
   padding-left: 18px;
   font-size: 0.9rem;
   color: #334155;
+}
+
+.cv-job-item {
+  margin-bottom: 10px;
+}
+
+.cv-job-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.cv-date {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.cv-skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 @media print {
@@ -900,16 +1200,34 @@ h2 {
   }
 }
 
-/* Responsive Styles */
-@media (max-width: 992px) {
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+@media (max-width: 860px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  body {
+    padding-bottom: 60px;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
     text-align: center;
   }
   
+  .hero-image-outer {
+    justify-content: center;
+  }
+
   .hero-image-wrapper {
-    max-width: 320px;
+    max-width: 300px;
   }
   
   .hero-ctas {
@@ -926,15 +1244,15 @@ h2 {
   }
   
   .skills-grid {
-    grid-template-columns: 1fr;
-    max-width: 600px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 700px;
     margin: 0 auto;
     gap: 1.5rem;
   }
   
   .projects-grid {
     grid-template-columns: 1fr;
-    max-width: 600px;
+    max-width: 640px;
     margin: 0 auto;
     gap: 2rem;
   }
@@ -942,7 +1260,7 @@ h2 {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
-    max-width: 600px;
+    max-width: 640px;
     margin: 0 auto;
   }
 }
@@ -954,7 +1272,7 @@ h2 {
   
   .hero-section {
     min-height: auto;
-    padding-top: 130px;
+    padding-top: 100px;
     padding-bottom: 60px;
   }
 
@@ -962,38 +1280,8 @@ h2 {
     font-size: 2.5rem;
   }
   
-  .hero-typing-text {
+  .hero-role {
     font-size: 1.8rem;
-  }
-
-  .nav-links {
-    display: flex;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    background: rgba(8, 8, 16, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--glass-border);
-    flex-direction: column;
-    padding: 0 2rem;
-    gap: 1.5rem;
-    text-align: center;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.4s ease;
-  }
-  
-  .nav-links.active {
-    max-height: 400px;
-    opacity: 1;
-    padding: 2rem;
-  }
-  
-  .nav-toggle {
-    display: block;
   }
   
   .about-section, .skills-section, .projects-section, .contact-section {
@@ -1008,6 +1296,10 @@ h2 {
     grid-template-columns: 1fr;
   }
   
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
   .skills-category {
     padding: 1.5rem;
   }
@@ -1025,6 +1317,15 @@ h2 {
     gap: 1rem;
     text-align: center;
   }
+
+  .cv-paper {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .cv-skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1032,8 +1333,12 @@ h2 {
     padding: 0 16px;
   }
   
+  .navbar-inner {
+    height: 60px;
+  }
+
   .hero-section {
-    padding-top: 110px;
+    padding-top: 80px;
     padding-bottom: 40px;
   }
 
@@ -1041,11 +1346,7 @@ h2 {
     font-size: 2rem;
   }
   
-  .hero-title span {
-    font-size: 1.8rem !important;
-  }
-  
-  .hero-typing-text {
+  .hero-role {
     font-size: 1.4rem;
   }
 
@@ -1081,10 +1382,12 @@ h2 {
     width: 100%;
     justify-content: center;
   }
-}
 
-/* Keyframe Animations */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  .cv-paper {
+    padding: 1.25rem 1rem;
+  }
+
+  .cv-paper-header h1 {
+    font-size: 1.5rem;
+  }
 }

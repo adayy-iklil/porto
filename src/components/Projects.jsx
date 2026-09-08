@@ -50,31 +50,20 @@ export default function Projects() {
         </div>
 
         <div className="projects-grid">
-          {projectsList.map((project) => (
-            <div key={project.id} className="project-card">
+          {projectsList.map((project, index) => (
+            <article key={project.id} className="project-card">
               <div className="project-media">
-                <div className="project-glow-overlay"></div>
                 <img src={project.image} alt={project.title} className="project-img" />
-                <span 
-                  style={{
-                    position: 'absolute',
-                    top: '16px',
-                    right: '16px',
-                    background: 'rgba(0, 0, 0, 0.4)',
-                    backdropFilter: 'blur(4px)',
-                    fontSize: '0.75rem',
-                    padding: '4px 10px',
-                    borderRadius: '30px',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    fontWeight: 600,
-                    zIndex: 2
-                  }}
-                >
+                <span className="project-type-badge">
                   {project.type}
                 </span>
               </div>
 
               <div className="project-content">
+                <div className="project-meta-row">
+                  <span className="project-index">0{index + 1}</span>
+                  <span className="project-category">{project.type}</span>
+                </div>
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-desc">{project.desc}</p>
 
@@ -88,11 +77,11 @@ export default function Projects() {
 
                 <div className="project-links">
                   <a href={project.demo} target="_blank" rel="noreferrer" className="project-link">
-                    <ExternalLink className="w-4 h-4 inline mr-1" /> Demo Live
+                    Demo Live <ExternalLink className="w-4 h-4 inline ml-1" />
                   </a>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

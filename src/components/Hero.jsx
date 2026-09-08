@@ -46,11 +46,11 @@ export default function Hero({ onOpenCv }) {
           <div className="hero-info-container">
             <span className="hero-tag">Halo, Selamat Datang</span>
             <h1 className="hero-title">
-              Saya <span>Iklil Badar</span> <br />
-              <span className="hero-typing-text">
+              Saya <span className="hero-name">Iklil Badar</span>
+              <div className="hero-role">
                 <span id="typing-text">{typedText}</span>
-                <span className="typing-cursor" style={{ color: 'var(--accent-blue)', animation: 'blink 0.7s infinite' }}>|</span>
-              </span>
+                <span className="typing-cursor">|</span>
+              </div>
             </h1>
             <p className="hero-desc">
               Siswa RPL (Rekayasa Perangkat Lunak) di SMKN 6 Jakarta yang memiliki minat mendalam di bidang Software Development dan Teknologi Informasi. Berpengalaman mengembangkan website, aplikasi desktop, dan sistem berbasis database.
@@ -62,7 +62,7 @@ export default function Hero({ onOpenCv }) {
               <button id="open-cv-btn" onClick={onOpenCv} className="btn btn-secondary">
                 <FileText className="w-4 h-4 mr-1 inline" /> Lihat CV Saya
               </button>
-              <a href="#projects" className="btn btn-secondary">
+              <a href="#projects" className="btn btn-outline">
                 Lihat Proyek
               </a>
             </div>

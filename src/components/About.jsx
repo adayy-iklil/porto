@@ -23,7 +23,7 @@ export default function About({ onOpenCv }) {
               <p>
                 Saya memiliki kemampuan pemecahan masalah (problem solving) yang baik, terbiasa berpikir logis, dan sangat bersemangat untuk terus belajar hal baru. Saat ini, saya siap berkontribusi secara aktif sebagai peserta magang di bidang IT.
               </p>
-              <div style={{ marginTop: '1.5rem' }}>
+              <div className="about-bio-cta">
                 <button id="open-cv-about" onClick={onOpenCv} className="btn btn-primary">
                   <FileText className="w-4 h-4 mr-1 inline" /> Baca Curriculum Vitae (CV)
                 </button>
@@ -32,39 +32,39 @@ export default function About({ onOpenCv }) {
 
             <div className="about-meta">
               <div className="meta-item">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <GraduationCap style={{ color: 'var(--accent-blue)' }} className="w-5 h-5" />
-                  <span className="meta-label" style={{ margin: 0 }}>Pendidikan</span>
+                <div className="meta-item-header">
+                  <GraduationCap className="w-5 h-5 meta-icon" />
+                  <span className="meta-label">Pendidikan</span>
                 </div>
                 <span className="meta-val">SMKN 6 Jakarta</span>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Rekayasa Perangkat Lunak</p>
+                <p className="meta-desc">Rekayasa Perangkat Lunak</p>
               </div>
 
               <div className="meta-item">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <BookOpen style={{ color: 'var(--accent-blue)' }} className="w-5 h-5" />
-                  <span className="meta-label" style={{ margin: 0 }}>Fokus Minat</span>
+                <div className="meta-item-header">
+                  <BookOpen className="w-5 h-5 meta-icon" />
+                  <span className="meta-label">Fokus Minat</span>
                 </div>
                 <span className="meta-val">Software Development</span>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Web, Desktop & Database</p>
+                <p className="meta-desc">Web, Desktop & Database</p>
               </div>
 
               <div className="meta-item">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <MapPin style={{ color: 'var(--accent-blue)' }} className="w-5 h-5" />
-                  <span className="meta-label" style={{ margin: 0 }}>Lokasi</span>
+                <div className="meta-item-header">
+                  <MapPin className="w-5 h-5 meta-icon" />
+                  <span className="meta-label">Lokasi</span>
                 </div>
                 <span className="meta-val">Jakarta, Indonesia</span>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>DKI Jakarta</p>
+                <p className="meta-desc">DKI Jakarta</p>
               </div>
 
               <div className="meta-item">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <Award style={{ color: 'var(--accent-blue)' }} className="w-5 h-5" />
-                  <span className="meta-label" style={{ margin: 0 }}>Kesiapan</span>
+                <div className="meta-item-header">
+                  <Award className="w-5 h-5 meta-icon" />
+                  <span className="meta-label">Kesiapan</span>
                 </div>
                 <span className="meta-val">Internship Ready</span>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Siap untuk magang IT</p>
+                <p className="meta-desc">Siap untuk magang IT</p>
               </div>
             </div>
           </div>
