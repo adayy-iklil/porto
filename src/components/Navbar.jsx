@@ -7,11 +7,14 @@ export default function Navbar({ onOpenCv }) {
   const [hoveredSection, setHoveredSection] = useState(null);
   const [desktopPillStyle, setDesktopPillStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [mobilePillStyle, setMobilePillStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const [isDragging, setIsDragging] = useState(false);
 
   const desktopNavRef = useRef(null);
   const mobileNavRef = useRef(null);
   const isManualScrolling = useRef(false);
   const scrollUnlockTimer = useRef(null);
+  const isDraggingRef = useRef(false);
+  const lastActiveIdRef = useRef('hero');
 
   const navItems = [
     { href: '#hero', label: 'Beranda', id: 'hero' },
@@ -44,7 +47,7 @@ export default function Navbar({ onOpenCv }) {
         }
       }
 
-      // Mobile Pill (Tracks cursor hover, tap & active state)
+      // Mobile Pill (Tracks cursor hover, tap, drag & active state)
       if (mobileNavRef.current) {
         const activeEl = mobileNavRef.current.querySelector(`[data-nav-id="${targetSectionId}"]`);
         if (activeEl) {
@@ -103,11 +106,12 @@ export default function Navbar({ onOpenCv }) {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       setIsScrolled(scrollTop > 20);
 
-      // If manual navigation (click/tap) is currently scrolling, DO NOT let scrollspy jitter
-      if (isManualScrolling.current) return;
+      // If manual navigation or dragging is active, do not let scrollspy jitter
+      if (isManualScrolling.current || isDraggingRef.current) return;
 
       const current = calculateActiveSection();
       setActiveSection((prev) => (prev !== current ? current : prev));
+      lastActiveIdRef.current = current;
     };
 
     const handleResize = () => {
@@ -141,14 +145,12 @@ export default function Navbar({ onOpenCv }) {
     };
   }, [currentDisplaySection, updatePills]);
 
-  // Handle clicking / tapping nav items with smooth scroll and jitter prevention
-  const handleNavClick = (e, targetId) => {
-    e.preventDefault();
-    
-    // Lock scroll-spy immediately to prevent flickering through passing sections
+  // Navigate to target section smoothly
+  const scrollToTarget = (targetId) => {
     isManualScrolling.current = true;
     setActiveSection(targetId);
     setHoveredSection(targetId);
+    lastActiveIdRef.current = targetId;
     updatePills(targetId);
 
     const targetEl = document.getElementById(targetId);
@@ -163,24 +165,82 @@ export default function Navbar({ onOpenCv }) {
       });
     }
 
-    // Clear existing timer and unlock only after smooth scroll has finished
     if (scrollUnlockTimer.current) clearTimeout(scrollUnlockTimer.current);
-    
-    // Smooth unlock window
     scrollUnlockTimer.current = setTimeout(() => {
       isManualScrolling.current = false;
-    }, 1250);
+    }, 1400);
+  };
+
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    scrollToTarget(targetId);
   };
 
   const handleHoverItem = (id) => {
     setActiveSection(id);
     setHoveredSection(id);
+    lastActiveIdRef.current = id;
     updatePills(id);
   };
 
   const handleLeaveNav = () => {
     setHoveredSection(null);
     updatePills(activeSection);
+  };
+
+  // Find nearest section tab from clientX pointer coordinates
+  const getSectionFromPointerX = (clientX) => {
+    if (!mobileNavRef.current) return null;
+    const items = mobileNavRef.current.querySelectorAll('.mobile-nav-item');
+    let closestId = null;
+    let minDistance = Infinity;
+
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      const itemCenterX = rect.left + rect.width / 2;
+      const distance = Math.abs(clientX - itemCenterX);
+      const navLink = item.querySelector('[data-nav-id]');
+      const navId = navLink?.getAttribute('data-nav-id');
+      
+      if (distance < minDistance && navId) {
+        minDistance = distance;
+        closestId = navId;
+      }
+    });
+
+    return closestId;
+  };
+
+  // Touch / Pointer Drag Gesture (WhatsApp iOS 26 style drag-and-slide)
+  const handlePointerDown = (e) => {
+    isDraggingRef.current = true;
+    setIsDragging(true);
+
+    const targetId = getSectionFromPointerX(e.clientX);
+    if (targetId) {
+      handleHoverItem(targetId);
+      if (navigator.vibrate) navigator.vibrate(10);
+    }
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDraggingRef.current) return;
+    const targetId = getSectionFromPointerX(e.clientX);
+    if (targetId && targetId !== lastActiveIdRef.current) {
+      handleHoverItem(targetId);
+      if (navigator.vibrate) navigator.vibrate(8);
+    }
+  };
+
+  const handlePointerUp = (e) => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    setIsDragging(false);
+
+    const targetId = getSectionFromPointerX(e.clientX) || lastActiveIdRef.current;
+    if (targetId) {
+      scrollToTarget(targetId);
+    }
   };
 
   return (
@@ -263,11 +323,14 @@ export default function Navbar({ onOpenCv }) {
         </div>
       </header>
 
-      {/* Floating Bottom Nav for Mobile with Smooth Liquid Glass Sliding & Cursor Hover Following */}
+      {/* Floating Bottom Nav for Mobile with Interactive Touch Drag Gesture (WhatsApp iOS 26 style) */}
       <nav 
-        className="mobile-bottom-nav" 
+        className={`mobile-bottom-nav ${isDragging ? 'is-dragging' : ''}`}
         aria-label="Mobile Navigation"
-        onMouseLeave={handleLeaveNav}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
       >
         <ul 
           className="mobile-bottom-nav-links" 
@@ -308,4 +371,5 @@ export default function Navbar({ onOpenCv }) {
     </>
   );
 }
+
 
