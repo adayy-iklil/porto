@@ -75,7 +75,6 @@ export default function Projects() {
           {projectsList.map((project, index) => (
             <article key={project.id} className={`project-card ${index % 2 !== 0 ? 'reverse' : ''}`}>
               <div className="project-info">
-                <span className="project-number">PROJECT 0${index + 1}</span>
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-desc">{project.desc}</p>
 

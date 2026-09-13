@@ -355,66 +355,72 @@ a {
   gap: 0.75rem;
 }
 
-/* Mobile Bottom Nav (Clean quiet toolbar) */
-.mobile-bottom-nav {
+
+/* Mobile Hamburger Button */
+.mobile-toggle-btn {
   display: none;
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 99;
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: var(--bg-card);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  padding: 0.35rem;
-  width: calc(100% - 2rem);
-  max-width: 440px;
-}
-
-.mobile-bottom-nav-links {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  list-style: none;
-  position: relative;
-  width: 100%;
-}
-
-.mobile-nav-item {
-  flex: 1;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-.mobile-bottom-nav-link {
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  padding: 0.5rem 0.25rem;
-  display: block;
-  transition: color var(--transition-fast);
-}
-
-.mobile-bottom-nav-link.active {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.mobile-sliding-glass-pill {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  background-color: var(--bg-muted);
   border-radius: var(--radius-sm);
-  z-index: 1;
-  transition: transform var(--transition-normal), width var(--transition-normal), opacity var(--transition-fast);
-  pointer-events: none;
+  padding: 0.4rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
 }
+
+.mobile-toggle-btn:hover {
+  background-color: var(--bg-muted);
+  border-color: var(--color-border-hover);
+}
+
+/* Mobile Dropdown Menu */
+.mobile-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgba(250, 250, 248, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 0.75rem 0 1rem 0;
+  animation: mobileMenuSlide 200ms ease-out forwards;
+}
+
+@keyframes mobileMenuSlide {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mobile-dropdown-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobile-dropdown-link {
+  display: block;
+  padding: 0.65rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.mobile-dropdown-link:hover, .mobile-dropdown-link.active {
+  color: var(--text-primary);
+  background-color: var(--bg-muted);
+}
+
+.mobile-bottom-nav {
+  display: none !important;
+}
+
 
 /* ==================================================
    HERO SECTION
@@ -1244,6 +1250,27 @@ a {
   .desktop-nav {
     display: none;
   }
+
+  .mobile-toggle-btn {
+    display: flex;
+  }
+
+  h1 {
+    font-size: 2.15rem;
+  }
+
+  h2 {
+    font-size: 1.65rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
   .mobile-bottom-nav {
     display: block;
