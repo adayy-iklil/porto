@@ -1,12 +1,8 @@
 import React from 'react';
-import { FileText, Printer, Download, X } from 'lucide-react';
+import { FileText, Download, X } from 'lucide-react';
 
 export default function CvModal({ isOpen, onClose }) {
   if (!isOpen) return null;
-
-  const handlePrint = () => {
-    window.print();
-  };
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -33,9 +29,6 @@ export default function CvModal({ isOpen, onClose }) {
             >
               <Download className="w-3.5 h-3.5 mr-1 inline" /> Unduh PDF
             </a>
-            <button id="print-cv-btn" onClick={handlePrint} className="btn btn-secondary btn-sm">
-              <Printer className="w-3.5 h-3.5 mr-1 inline" /> Cetak
-            </button>
             <button id="close-cv-modal" onClick={onClose} className="cv-close-btn" aria-label="Close modal">
               <X className="w-5 h-5" />
             </button>
