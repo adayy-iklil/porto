@@ -38,6 +38,15 @@ export default function Projects() {
       type: 'Web Application',
       image: '/assets/kantinhub.png',
       demo: 'https://kantinhub6.netlify.app'
+    },
+    {
+      id: 5,
+      title: 'ADOM SCORING (E-Ticketing & Scoring System)',
+      desc: 'ADOM SCORING adalah platform e-ticketing dan rekapitulasi nilai Paskibra berbasis web modern. Memungkinkan pemesanan tiket digital secara online.',
+      tech: ['React.js', 'Laravel API', 'MySQL', 'RESTful API'],
+      type: 'Web Application',
+      image: '/assets/adomscoring.png',
+      demo: 'https://adomscoring.my.id'
     }
   ];
 
