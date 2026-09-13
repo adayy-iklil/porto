@@ -68,6 +68,15 @@ export default function Navbar({ onOpenCv }) {
     scrollToTarget(targetId);
   };
 
+  const handleCvClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsMobileMenuOpen(false);
+    if (onOpenCv) {
+      onOpenCv();
+    }
+  };
+
   return (
     <header className={`navbar-header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
@@ -104,17 +113,17 @@ export default function Navbar({ onOpenCv }) {
 
           {/* Actions & Mobile Menu Toggle */}
           <div className="nav-actions">
-            {onOpenCv && (
-              <button 
-                onClick={onOpenCv} 
-                className="btn btn-secondary btn-sm nav-cv-btn"
-                aria-label="Lihat CV"
-              >
-                <FileText className="w-3.5 h-3.5 mr-1 inline" /> CV
-              </button>
-            )}
+            <button 
+              type="button"
+              onClick={handleCvClick} 
+              className="btn btn-secondary btn-sm nav-cv-btn"
+              aria-label="Lihat CV"
+            >
+              <FileText className="w-3.5 h-3.5 mr-1 inline" /> CV
+            </button>
 
             <button
+              type="button"
               className="mobile-toggle-btn"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
@@ -142,6 +151,16 @@ export default function Navbar({ onOpenCv }) {
                   </a>
                 </li>
               ))}
+              <li>
+                <button
+                  type="button"
+                  onClick={handleCvClick}
+                  className="mobile-dropdown-link mobile-cv-link"
+                  style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  📄 Lihat Curriculum Vitae (CV)
+                </button>
+              </li>
             </ul>
           </div>
         </div>
