@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Printer, X } from 'lucide-react';
+import { FileText, Printer, Download, X } from 'lucide-react';
 
 export default function CvModal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -8,8 +8,14 @@ export default function CvModal({ isOpen, onClose }) {
     window.print();
   };
 
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div id="cv-modal" className="cv-modal-overlay active" onClick={onClose}>
+    <div id="cv-modal" className="cv-modal-overlay active" onClick={handleBackdropClick}>
       <div className="cv-modal-box" onClick={(e) => e.stopPropagation()}>
         <div className="cv-modal-header">
           <h3>
@@ -17,8 +23,18 @@ export default function CvModal({ isOpen, onClose }) {
             Curriculum Vitae — Iklil Badar
           </h3>
           <div className="cv-modal-actions">
+            <a 
+              href="/cv.pdf" 
+              download="Iklil_Badar_CV.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-accent btn-sm"
+              style={{ textDecoration: 'none' }}
+            >
+              <Download className="w-3.5 h-3.5 mr-1 inline" /> Unduh PDF
+            </a>
             <button id="print-cv-btn" onClick={handlePrint} className="btn btn-secondary btn-sm">
-              <Printer className="w-3.5 h-3.5 mr-1 inline" /> Cetak / PDF
+              <Printer className="w-3.5 h-3.5 mr-1 inline" /> Cetak
             </button>
             <button id="close-cv-modal" onClick={onClose} className="cv-close-btn" aria-label="Close modal">
               <X className="w-5 h-5" />
