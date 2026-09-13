@@ -73,7 +73,18 @@ export default function Projects() {
 
         <div className="projects-list">
           {projectsList.map((project, index) => (
-            <article key={project.id} className={`project-card ${index % 2 !== 0 ? 'reverse' : ''}`}>
+            <article key={project.id} className="project-card">
+              {/* Header Label: PROJECT 01, PROJECT 02, etc. */}
+              <div className="project-card-header">
+                <span className="project-number">PROJECT 0{index + 1}</span>
+              </div>
+
+              {/* Project Image Preview (At the top, below label) */}
+              <div className="project-media">
+                <img src={project.image} alt={project.title} className="project-img" />
+              </div>
+
+              {/* Project Details (Under the photo) */}
               <div className="project-info">
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-desc">{project.desc}</p>
@@ -102,10 +113,6 @@ export default function Projects() {
                     Demo Live <ExternalLink className="w-3.5 h-3.5 ml-1 inline" />
                   </a>
                 </div>
-              </div>
-
-              <div className="project-media">
-                <img src={project.image} alt={project.title} className="project-img" />
               </div>
             </article>
           ))}
