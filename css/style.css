@@ -1272,27 +1272,6 @@ a {
   }
 }
 
-  .mobile-bottom-nav {
-    display: block;
-  }
-
-  h1 {
-    font-size: 2.15rem;
-  }
-
-  h2 {
-    font-size: 1.65rem;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cv-skills-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 480px) {
   .container {
     padding: 0 1rem;
