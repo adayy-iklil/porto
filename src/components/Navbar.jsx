@@ -31,37 +31,35 @@ export default function Navbar({ onOpenCv }) {
   const updatePills = useCallback((targetSectionId) => {
     if (!targetSectionId) return;
 
-    requestAnimationFrame(() => {
-      // Desktop Pill
-      if (desktopNavRef.current) {
-        const activeEl = desktopNavRef.current.querySelector(`[data-nav-id="${targetSectionId}"]`);
-        if (activeEl) {
-          const liEl = activeEl.closest('li') || activeEl;
-          if (liEl && liEl.offsetWidth > 0) {
-            setDesktopPillStyle({
-              left: liEl.offsetLeft,
-              width: liEl.offsetWidth,
-              opacity: 1,
-            });
-          }
+    // Desktop Pill
+    if (desktopNavRef.current) {
+      const activeEl = desktopNavRef.current.querySelector(`[data-nav-id="${targetSectionId}"]`);
+      if (activeEl) {
+        const liEl = activeEl.closest('li') || activeEl;
+        if (liEl && liEl.offsetWidth > 0) {
+          setDesktopPillStyle({
+            left: liEl.offsetLeft - 1,
+            width: liEl.offsetWidth + 2,
+            opacity: 1,
+          });
         }
       }
+    }
 
-      // Mobile Pill (Tracks cursor hover, tap, drag & active state)
-      if (mobileNavRef.current) {
-        const activeEl = mobileNavRef.current.querySelector(`[data-nav-id="${targetSectionId}"]`);
-        if (activeEl) {
-          const liEl = activeEl.closest('li') || activeEl;
-          if (liEl && liEl.offsetWidth > 0) {
-            setMobilePillStyle({
-              left: liEl.offsetLeft,
-              width: liEl.offsetWidth,
-              opacity: 1,
-            });
-          }
+    // Mobile Pill (Tracks cursor hover, tap, drag & active state)
+    if (mobileNavRef.current) {
+      const activeEl = mobileNavRef.current.querySelector(`[data-nav-id="${targetSectionId}"]`);
+      if (activeEl) {
+        const liEl = activeEl.closest('li') || activeEl;
+        if (liEl && liEl.offsetWidth > 0) {
+          setMobilePillStyle({
+            left: liEl.offsetLeft,
+            width: liEl.offsetWidth,
+            opacity: 1,
+          });
         }
       }
-    });
+    }
   }, []);
 
   // Update pills whenever active or hovered section changes
@@ -177,7 +175,6 @@ export default function Navbar({ onOpenCv }) {
   };
 
   const handleHoverItem = (id) => {
-    setActiveSection(id);
     setHoveredSection(id);
     lastActiveIdRef.current = id;
     updatePills(id);
@@ -308,16 +305,9 @@ export default function Navbar({ onOpenCv }) {
                   className="btn btn-secondary btn-sm nav-cv-btn"
                   aria-label="Lihat CV"
                 >
-                  <FileText className="w-3.5 h-3.5 mr-1 inline" /> CV
+                  <FileText className="w-3 h-3 mr-1 inline" /> CV
                 </button>
               )}
-              <a 
-                href="#contact" 
-                className="btn btn-primary btn-sm nav-contact-btn"
-                onClick={(e) => handleNavClick(e, 'contact')}
-              >
-                Hubungi <ArrowUpRight className="w-3.5 h-3.5 ml-0.5 inline" />
-              </a>
             </div>
           </div>
         </div>

@@ -269,7 +269,7 @@ h2 {
     0 0 14px rgba(0, 210, 255, 0.3),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.65),
     inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-  transition: transform 680ms cubic-bezier(0.16, 1, 0.3, 1), width 680ms cubic-bezier(0.16, 1, 0.3, 1), opacity 250ms ease;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), width 220ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 150ms ease;
   pointer-events: none;
   z-index: 1;
   will-change: transform, width;
@@ -301,7 +301,6 @@ h2 {
 .nav-link.active {
   color: #ffffff;
   font-weight: 600;
-  transform: scale(1.04);
   text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
   background: transparent;
 }
@@ -312,29 +311,37 @@ h2 {
   gap: 10px;
 }
 
+.nav-cv-btn {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
 /* ==========================================================================
    Mobile Floating Bottom Pill Navigation with Liquid Glass Transition
    ========================================================================== */
 .mobile-bottom-nav {
   display: none;
   position: fixed;
-  bottom: 22px;
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  background: rgba(12, 12, 28, 0.88);
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
-  padding: 5px;
+  background: rgba(8, 8, 20, 0.95);
+  backdrop-filter: blur(28px) saturate(210%);
+  -webkit-backdrop-filter: blur(28px) saturate(210%);
+  padding: 4px 6px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 210, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.88), 0 0 24px rgba(0, 210, 255, 0.25);
   max-width: calc(100% - 20px);
-  width: auto;
+  width: min(390px, calc(100% - 20px));
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .mobile-bottom-nav-links {
@@ -342,9 +349,11 @@ h2 {
   display: flex;
   gap: 2px;
   align-items: center;
+  justify-content: space-between;
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 /* Dark Theme Liquid Glass Sliding Pill (Mobile) */
@@ -363,7 +372,7 @@ h2 {
     0 0 16px rgba(0, 210, 255, 0.35),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.65),
     inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-  transition: transform 680ms cubic-bezier(0.16, 1, 0.3, 1), width 680ms cubic-bezier(0.16, 1, 0.3, 1), opacity 250ms ease;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), width 220ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 150ms ease;
   pointer-events: none;
   z-index: 1;
   will-change: transform, width;
@@ -373,7 +382,7 @@ h2 {
 /* Realtime Interactive iOS Drag State */
 .mobile-bottom-nav.is-dragging .mobile-sliding-glass-pill {
   transition: transform 70ms ease-out, width 70ms ease-out !important;
-  transform: scale(1.08);
+  transform: scale(1.04);
   backdrop-filter: blur(30px) saturate(220%);
   -webkit-backdrop-filter: blur(30px) saturate(220%);
   box-shadow: 0 0 24px rgba(0, 210, 255, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.85);
@@ -384,30 +393,33 @@ h2 {
   position: relative;
   z-index: 2;
   list-style: none;
+  flex: 1;
+  text-align: center;
 }
 
 .mobile-bottom-nav-link {
   position: relative;
   z-index: 2;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-secondary);
-  padding: 7px 11px;
+  padding: 7px 4px;
   border-radius: var(--radius-full);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease, text-shadow 0.4s ease;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
   display: block;
   text-decoration: none;
   white-space: nowrap;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transform-origin: center center;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mobile-bottom-nav-link:hover,
 .mobile-bottom-nav-link.active {
   color: #ffffff;
   font-weight: 600;
-  transform: scale(1.05);
   text-shadow: 0 0 10px rgba(0, 210, 255, 0.65);
   background-color: transparent;
 }
@@ -909,6 +921,13 @@ h2 {
   justify-content: center;
 }
 
+.contact-item-details {
+  min-width: 0;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
 .contact-item-details h4 {
   font-size: 1.05rem;
   margin-bottom: 0.25rem;
@@ -919,6 +938,9 @@ h2 {
   font-size: 0.95rem;
   text-decoration: none;
   transition: color 0.2s ease;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .contact-item-details a:hover {
@@ -1208,6 +1230,16 @@ h2 {
   gap: 16px;
 }
 
+.cv-item-block {
+  margin-bottom: 12px;
+}
+
+.cv-item-date {
+  float: right;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
 @media print {
   body * {
     visibility: hidden;
@@ -1240,12 +1272,26 @@ h2 {
   }
 
   body {
-    padding-bottom: 60px;
+    padding-bottom: 74px;
+  }
+
+  .navbar-inner {
+    height: 58px;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+
+  .hero-section {
+    min-height: auto;
+    padding-top: 54px;
+    padding-bottom: 40px;
   }
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.25rem;
     text-align: center;
   }
   
@@ -1254,39 +1300,47 @@ h2 {
   }
 
   .hero-image-wrapper {
-    max-width: 300px;
+    max-width: 250px;
   }
   
   .hero-ctas {
     justify-content: center;
   }
+
+  .hero-title {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+  }
+
+  .hero-role {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
   
   .about-section, .skills-section, .projects-section, .contact-section {
-    padding: 80px 0;
+    padding: 60px 0;
   }
   
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
   
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
     max-width: 700px;
     margin: 0 auto;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
   
   .projects-grid {
     grid-template-columns: 1fr;
     max-width: 640px;
     margin: 0 auto;
-    gap: 2rem;
+    gap: 1.75rem;
   }
   
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
     max-width: 640px;
     margin: 0 auto;
   }
@@ -1294,29 +1348,15 @@ h2 {
 
 @media (max-width: 768px) {
   h2 {
-    font-size: 2rem;
-  }
-  
-  .hero-section {
-    min-height: auto;
-    padding-top: 100px;
-    padding-bottom: 60px;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
-  .hero-role {
-    font-size: 1.8rem;
+    font-size: 1.85rem;
   }
   
   .about-section, .skills-section, .projects-section, .contact-section {
-    padding: 60px 0;
+    padding: 50px 0;
   }
   
   .about-card {
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.25rem;
   }
   
   .about-meta {
@@ -1328,15 +1368,15 @@ h2 {
   }
 
   .skills-category {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
   
   .project-content {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
   
   .contact-form {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
   
   .footer-container {
@@ -1361,29 +1401,36 @@ h2 {
   }
   
   .navbar-inner {
-    height: 60px;
+    height: 52px;
+  }
+
+  .hero-tag {
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    margin-bottom: 1rem;
   }
 
   .hero-section {
-    padding-top: 80px;
-    padding-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 30px;
   }
 
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
   
   .hero-role {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
   }
 
   .hero-desc {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.75rem;
   }
   
   .btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
+    padding: 10px 18px;
+    font-size: 0.88rem;
   }
   
   .hero-ctas {
@@ -1397,7 +1444,7 @@ h2 {
   }
   
   .about-card {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 1rem;
   }
   
   .project-links {
@@ -1410,11 +1457,109 @@ h2 {
     justify-content: center;
   }
 
+  .cv-modal-overlay {
+    padding: 8px 6px;
+  }
+
+  .cv-modal-box {
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  .cv-modal-header {
+    padding: 8px 12px;
+  }
+
+  .cv-modal-header h3 {
+    font-size: 0.9rem;
+  }
+
+  .cv-modal-body {
+    padding: 8px 6px;
+  }
+
   .cv-paper {
-    padding: 1.25rem 1rem;
+    padding: 1rem 0.75rem;
+    line-height: 1.35;
+  }
+
+  .cv-paper-header {
+    padding-bottom: 6px;
+    margin-bottom: 10px;
   }
 
   .cv-paper-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .cv-paper-header p {
+    font-size: 0.76rem;
+    line-height: 1.3;
+  }
+
+  .cv-paper-section {
+    margin-bottom: 10px;
+  }
+
+  .cv-paper-section h3 {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    padding-bottom: 2px;
+  }
+
+  .cv-paper-section p,
+  .cv-paper-section ul {
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+
+  .cv-paper-section ul {
+    padding-left: 14px;
+  }
+
+  .cv-paper-section strong {
+    font-size: 0.78rem;
+  }
+
+  .cv-item-block {
+    margin-bottom: 6px;
+  }
+
+  .cv-item-date {
+    float: none;
+    display: block;
+    font-size: 0.72rem;
+    margin-bottom: 2px;
+    color: #64748b;
+  }
+
+  .mobile-bottom-nav {
+    padding: 5px 8px;
+    max-width: calc(100% - 16px);
+  }
+
+  .mobile-bottom-nav-link {
+    font-size: 0.78rem;
+    padding: 5px 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-bottom-nav-link {
+    font-size: 0.73rem;
+    padding: 4px 6px;
+  }
+
+  .cv-paper {
+    padding: 0.85rem 0.65rem;
+  }
+
+  .cv-paper-header h1 {
+    font-size: 1.15rem;
+  }
+
+  .cv-paper-section p,
+  .cv-paper-section ul {
+    font-size: 0.74rem;
   }
 }

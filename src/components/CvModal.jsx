@@ -13,11 +13,11 @@ export default function CvModal({ isOpen, onClose }) {
       <div className="cv-modal-box" onClick={(e) => e.stopPropagation()}>
         <div className="cv-modal-header">
           <h3>
-            <FileText className="w-5 h-5 inline mr-2 cv-header-icon" /> 
+            <FileText className="w-5 h-5 inline mr-2" style={{ color: 'var(--accent-blue)', verticalAlign: 'middle' }} /> 
             Curriculum Vitae — Iklil Badar
           </h3>
-          <div className="cv-modal-actions">
-            <button id="print-cv-btn" onClick={handlePrint} className="btn btn-secondary btn-print">
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <button id="print-cv-btn" onClick={handlePrint} className="btn btn-secondary" style={{ padding: '6px 14px', fontSize: '0.85rem' }}>
               <Printer className="w-4 h-4 mr-1 inline" /> Cetak / PDF
             </button>
             <button id="close-cv-modal" onClick={onClose} className="cv-close-btn">&times;</button>
@@ -39,7 +39,7 @@ export default function CvModal({ isOpen, onClose }) {
             <div className="cv-paper-section">
               <h3>PENDIDIKAN</h3>
               <strong>SMK Negeri 6 Jakarta ( 2024 – Sekarang )</strong>
-              <p className="cv-sub">RPL (Rekayasa Perangkat Lunak)</p>
+              <p style={{ marginBottom: '4px' }}>RPL (Rekayasa Perangkat Lunak)</p>
               <ul>
                 <li>Mempelajari pemrograman web dan basis data</li>
                 <li>Mengembangkan aplikasi berbasis web menggunakan HTML, CSS, JavaScript, PHP, dan MySQL.</li>
@@ -47,12 +47,9 @@ export default function CvModal({ isOpen, onClose }) {
             </div>
 
             <div className="cv-paper-section">
-              <h3>PENGALAMAN & PROJEK</h3>
-              <div className="cv-job-item">
-                <div className="cv-job-title-row">
-                  <strong>Front-End Web Developer – PT. Ace Service Energy</strong>
-                  <span className="cv-date">Jun – Jul 2026</span>
-                </div>
+              <h3>PROJEK & PENGALAMAN</h3>
+              <div className="cv-item-block">
+                <strong>Frontend Web Developer – PT. Ace Service Energy (aceenergyservice.com)</strong> <span className="cv-item-date">Jun – Jul 2026</span>
                 <ul>
                   <li>Membangun antarmuka pengguna (UI) responsif menggunakan React.js untuk website panel surya.</li>
                   <li>Berkolaborasi dalam tim menggunakan GitHub untuk mengembangkan fitur Front-End dan integrasi formulir layanan.</li>
@@ -60,23 +57,17 @@ export default function CvModal({ isOpen, onClose }) {
                 </ul>
               </div>
 
-              <div className="cv-job-item">
-                <div className="cv-job-title-row">
-                  <strong>Laravel Workshop</strong>
-                  <span className="cv-date">Okt 2025</span>
-                </div>
+              <div className="cv-item-block">
+                <strong>Frontend Web Developer – Adom Scoring (adomscoring.my.id)</strong> <span className="cv-item-date">Aug 2025</span>
                 <ul>
-                  <li>Mempelajari dasar framework Laravel.</li>
-                  <li>Membuat aplikasi web sederhana menggunakan Laravel.</li>
-                  <li>Memahami konsep MVC dan integrasi database MySQL.</li>
+                  <li>Membangun UI responsif menggunakan React JS untuk sistem ticketing.</li>
+                  <li>Mengintegrasikan aplikasi dengan RESTful API berbasis Laravel & MySQL.</li>
+                  <li>Memastikan performa aplikasi siap produksi (production-ready) hingga tahap deployment.</li>
                 </ul>
               </div>
 
-              <div className="cv-job-item">
-                <div className="cv-job-title-row">
-                  <strong>AI Workshop – Merkle</strong>
-                  <span className="cv-date">Jun 2026</span>
-                </div>
+              <div className="cv-item-block">
+                <strong>AI Workshop – Merkle</strong> <span className="cv-item-date">Jun 2026</span>
                 <ul>
                   <li>Mengikuti pelatihan mengenai dasar-dasar Artificial Intelligence.</li>
                   <li>Mempelajari penerapan AI dalam pengembangan teknologi.</li>
