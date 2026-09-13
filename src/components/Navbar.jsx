@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { FileText, ArrowUpRight } from 'lucide-react';
+import { FileText } from 'lucide-react';
 
 export default function Navbar({ onOpenCv }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -7,14 +7,11 @@ export default function Navbar({ onOpenCv }) {
   const [hoveredSection, setHoveredSection] = useState(null);
   const [desktopPillStyle, setDesktopPillStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [mobilePillStyle, setMobilePillStyle] = useState({ left: 0, width: 0, opacity: 0 });
-  const [isDragging, setIsDragging] = useState(false);
 
   const desktopNavRef = useRef(null);
   const mobileNavRef = useRef(null);
   const isManualScrolling = useRef(false);
   const scrollUnlockTimer = useRef(null);
-  const isDraggingRef = useRef(false);
-  const lastActiveIdRef = useRef('hero');
 
   const navItems = [
     { href: '#hero', label: 'Beranda', id: 'hero' },
@@ -24,29 +21,25 @@ export default function Navbar({ onOpenCv }) {
     { href: '#contact', label: 'Kontak', id: 'contact' },
   ];
 
-  // Follow hover cursor if available; otherwise show current active section
   const currentDisplaySection = hoveredSection || activeSection;
 
-  // Measure and position the liquid glass sliding capsules using exact element layout offsets
   const updatePills = useCallback((targetSectionId) => {
     if (!targetSectionId) return;
 
-    // Desktop Pill
     if (desktopNavRef.current) {
       const activeEl = desktopNavRef.current.querySelector(`[data-nav-id="${targetSectionId}"]`);
       if (activeEl) {
         const liEl = activeEl.closest('li') || activeEl;
         if (liEl && liEl.offsetWidth > 0) {
           setDesktopPillStyle({
-            left: liEl.offsetLeft - 1,
-            width: liEl.offsetWidth + 2,
+            left: liEl.offsetLeft,
+            width: liEl.offsetWidth,
             opacity: 1,
           });
         }
       }
     }
 
-    // Mobile Pill (Tracks cursor hover, tap, drag & active state)
     if (mobileNavRef.current) {
       const activeEl = mobileNavRef.current.querySelector(`[data-nav-id="${targetSectionId}"]`);
       if (activeEl) {
@@ -62,12 +55,10 @@ export default function Navbar({ onOpenCv }) {
     }
   }, []);
 
-  // Update pills whenever active or hovered section changes
   useEffect(() => {
     updatePills(currentDisplaySection);
   }, [currentDisplaySection, updatePills]);
 
-  // Robust Viewport Scroll-Spy and Scroll Event Handling
   useEffect(() => {
     const calculateActiveSection = () => {
       const sections = ['hero', 'about', 'skills', 'projects', 'contact'];
@@ -75,41 +66,26 @@ export default function Navbar({ onOpenCv }) {
       const scrollHeight = document.documentElement.scrollHeight;
       const clientHeight = document.documentElement.clientHeight;
 
-      // 1. If at top of the page (within 100px), always hero
-      if (scrollTop <= 100) {
-        return 'hero';
-      }
+      if (scrollTop <= 100) return 'hero';
+      if (scrollTop + clientHeight >= scrollHeight - 80) return 'contact';
 
-      // 2. If at bottom of the page (within 80px), always contact
-      if (scrollTop + clientHeight >= scrollHeight - 80) {
-        return 'contact';
-      }
-
-      // 3. Scan sections from bottom to top to identify the current visible section
       const offsetThreshold = clientHeight * 0.45;
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= offsetThreshold) {
-            return sections[i];
-          }
+          if (rect.top <= offsetThreshold) return sections[i];
         }
       }
-
       return 'hero';
     };
 
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       setIsScrolled(scrollTop > 20);
-
-      // If manual navigation or dragging is active, do not let scrollspy jitter
-      if (isManualScrolling.current || isDraggingRef.current) return;
-
+      if (isManualScrolling.current) return;
       const current = calculateActiveSection();
       setActiveSection((prev) => (prev !== current ? current : prev));
-      lastActiveIdRef.current = current;
     };
 
     const handleResize = () => {
@@ -119,36 +95,20 @@ export default function Navbar({ onOpenCv }) {
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
 
-    // Initial position measurements after DOM rendering & font load
-    const initTimer = setTimeout(() => {
-      updatePills(currentDisplaySection);
-    }, 80);
-
-    const initTimer2 = setTimeout(() => {
-      updatePills(currentDisplaySection);
-    }, 300);
-
-    if (document.fonts?.ready) {
-      document.fonts.ready.then(() => {
-        updatePills(currentDisplaySection);
-      });
-    }
+    const timer = setTimeout(() => updatePills(currentDisplaySection), 100);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
-      clearTimeout(initTimer);
-      clearTimeout(initTimer2);
+      clearTimeout(timer);
       if (scrollUnlockTimer.current) clearTimeout(scrollUnlockTimer.current);
     };
   }, [currentDisplaySection, updatePills]);
 
-  // Navigate to target section smoothly
   const scrollToTarget = (targetId) => {
     isManualScrolling.current = true;
     setActiveSection(targetId);
     setHoveredSection(targetId);
-    lastActiveIdRef.current = targetId;
     updatePills(targetId);
 
     const targetEl = document.getElementById(targetId);
@@ -156,7 +116,7 @@ export default function Navbar({ onOpenCv }) {
       const navOffset = window.innerWidth <= 860 ? 20 : 76;
       const elementPosition = targetEl.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = Math.max(0, elementPosition - navOffset);
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -166,7 +126,7 @@ export default function Navbar({ onOpenCv }) {
     if (scrollUnlockTimer.current) clearTimeout(scrollUnlockTimer.current);
     scrollUnlockTimer.current = setTimeout(() => {
       isManualScrolling.current = false;
-    }, 1400);
+    }, 1000);
   };
 
   const handleNavClick = (e, targetId) => {
@@ -174,98 +134,26 @@ export default function Navbar({ onOpenCv }) {
     scrollToTarget(targetId);
   };
 
-  const handleHoverItem = (id) => {
-    setHoveredSection(id);
-    lastActiveIdRef.current = id;
-    updatePills(id);
-  };
-
-  const handleLeaveNav = () => {
-    setHoveredSection(null);
-    updatePills(activeSection);
-  };
-
-  // Find nearest section tab from clientX pointer coordinates
-  const getSectionFromPointerX = (clientX) => {
-    if (!mobileNavRef.current) return null;
-    const items = mobileNavRef.current.querySelectorAll('.mobile-nav-item');
-    let closestId = null;
-    let minDistance = Infinity;
-
-    items.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      const itemCenterX = rect.left + rect.width / 2;
-      const distance = Math.abs(clientX - itemCenterX);
-      const navLink = item.querySelector('[data-nav-id]');
-      const navId = navLink?.getAttribute('data-nav-id');
-      
-      if (distance < minDistance && navId) {
-        minDistance = distance;
-        closestId = navId;
-      }
-    });
-
-    return closestId;
-  };
-
-  // Touch / Pointer Drag Gesture (WhatsApp iOS 26 style drag-and-slide)
-  const handlePointerDown = (e) => {
-    isDraggingRef.current = true;
-    setIsDragging(true);
-
-    const targetId = getSectionFromPointerX(e.clientX);
-    if (targetId) {
-      handleHoverItem(targetId);
-      if (navigator.vibrate) navigator.vibrate(10);
-    }
-  };
-
-  const handlePointerMove = (e) => {
-    if (!isDraggingRef.current) return;
-    const targetId = getSectionFromPointerX(e.clientX);
-    if (targetId && targetId !== lastActiveIdRef.current) {
-      handleHoverItem(targetId);
-      if (navigator.vibrate) navigator.vibrate(8);
-    }
-  };
-
-  const handlePointerUp = (e) => {
-    if (!isDraggingRef.current) return;
-    isDraggingRef.current = false;
-    setIsDragging(false);
-
-    const targetId = getSectionFromPointerX(e.clientX) || lastActiveIdRef.current;
-    if (targetId) {
-      scrollToTarget(targetId);
-    }
-  };
-
   return (
     <>
-      {/* Top Header Bar for Desktop & Mobile Branding */}
       <header className={`navbar-header ${isScrolled ? 'scrolled' : ''}`}>
         <div className="container">
           <div className="navbar-inner">
-            {/* Logo */}
-            <a 
-              href="#hero" 
-              className="nav-logo" 
-              onClick={(e) => handleNavClick(e, 'hero')}
-            >
-              Iklil Badar
-            </a>
-
-            {/* Desktop Center Pill Nav with Liquid Glass Cursor Tracker */}
-            <nav 
-              className="desktop-nav" 
-              aria-label="Desktop Navigation"
-              onMouseLeave={handleLeaveNav}
-            >
-              <ul 
-                className="nav-links" 
-                ref={desktopNavRef}
+            <div className="nav-brand-group">
+              <a 
+                href="#hero" 
+                className="nav-logo" 
+                onClick={(e) => handleNavClick(e, 'hero')}
               >
-                {/* iOS Liquid Glass Sliding Pill Indicator */}
+                Iklil Badar
+              </a>
+              <span className="nav-status-badge">
+                <span className="status-dot"></span> Available for opportunities
+              </span>
+            </div>
+
+            <nav className="desktop-nav" aria-label="Desktop Navigation">
+              <ul className="nav-links" ref={desktopNavRef} onMouseLeave={() => setHoveredSection(null)}>
                 <div
                   className="nav-sliding-glass-pill"
                   style={{
@@ -279,10 +167,7 @@ export default function Navbar({ onOpenCv }) {
                   <li 
                     key={item.id} 
                     className="nav-item"
-                    onMouseEnter={() => handleHoverItem(item.id)}
-                    onMouseMove={() => {
-                      if (hoveredSection !== item.id) handleHoverItem(item.id);
-                    }}
+                    onMouseEnter={() => setHoveredSection(item.id)}
                   >
                     <a
                       href={item.href}
@@ -297,7 +182,6 @@ export default function Navbar({ onOpenCv }) {
               </ul>
             </nav>
 
-            {/* Right Action Buttons */}
             <div className="nav-actions">
               {onOpenCv && (
                 <button 
@@ -305,7 +189,7 @@ export default function Navbar({ onOpenCv }) {
                   className="btn btn-secondary btn-sm nav-cv-btn"
                   aria-label="Lihat CV"
                 >
-                  <FileText className="w-3 h-3 mr-1 inline" /> CV
+                  <FileText className="w-3.5 h-3.5 mr-1 inline" /> CV
                 </button>
               )}
             </div>
@@ -313,20 +197,9 @@ export default function Navbar({ onOpenCv }) {
         </div>
       </header>
 
-      {/* Floating Bottom Nav for Mobile with Interactive Touch Drag Gesture (WhatsApp iOS 26 style) */}
-      <nav 
-        className={`mobile-bottom-nav ${isDragging ? 'is-dragging' : ''}`}
-        aria-label="Mobile Navigation"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-      >
-        <ul 
-          className="mobile-bottom-nav-links" 
-          ref={mobileNavRef}
-        >
-          {/* iOS Liquid Glass Sliding Capsule Indicator for Mobile */}
+      {/* Mobile Bottom Navigation */}
+      <nav className="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <ul className="mobile-bottom-nav-links" ref={mobileNavRef}>
           <div
             className="mobile-sliding-glass-pill"
             style={{
@@ -337,15 +210,7 @@ export default function Navbar({ onOpenCv }) {
             aria-hidden="true"
           />
           {navItems.map((item) => (
-            <li 
-              key={item.id} 
-              className="mobile-nav-item"
-              onMouseEnter={() => handleHoverItem(item.id)}
-              onMouseMove={() => {
-                if (hoveredSection !== item.id) handleHoverItem(item.id);
-              }}
-              onTouchStart={() => handleHoverItem(item.id)}
-            >
+            <li key={item.id} className="mobile-nav-item">
               <a
                 href={item.href}
                 data-nav-id={item.id}
@@ -361,5 +226,3 @@ export default function Navbar({ onOpenCv }) {
     </>
   );
 }
-
-

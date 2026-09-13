@@ -50,49 +50,54 @@ export default function Contact() {
     <section id="contact" className="contact-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-subtitle">Hubungi Saya</span>
+          <span className="section-label">04 / HUBUNGI SAYA</span>
           <h2>Mari Terhubung & Berkolaborasi</h2>
+          <p className="section-title-desc">
+            Terbuka untuk diskusi proyek, tawaran magang IT, atau sekadar bertukar ide.
+          </p>
         </div>
 
         <div className="contact-grid">
           <div className="contact-info">
-            <h3>Peluang Magang & Kolaborasi</h3>
+            <h3>Peluang Magang & Proyek</h3>
             <p className="contact-lead-desc">
-              Saya sangat tertarik dengan tawaran magang, kerja sama proyek web/software, atau diskusi seru mengenai dunia IT. Silakan hubungi saya melalui form atau kontak di bawah ini.
+              Saya sangat tertarik dengan tawaran magang, kerja sama pengembangan aplikasi web/software, atau diskusi teknis. Silakan kirim pesan melalui form atau kontak langsung di bawah ini.
             </p>
 
-            <div className="contact-item">
-              <div className="contact-icon-wrapper">
-                <Mail className="w-5 h-5" />
+            <div className="contact-details-list">
+              <div className="contact-item">
+                <div className="contact-icon-wrapper">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="contact-item-details">
+                  <h4>EMAIL DIRECT</h4>
+                  <a href="mailto:badariklil6@gmail.com">badariklil6@gmail.com</a>
+                </div>
               </div>
-              <div className="contact-item-details">
-                <h4>Email</h4>
-                <a href="mailto:badariklil6@gmail.com">badariklil6@gmail.com</a>
+
+              <div className="contact-item">
+                <div className="contact-icon-wrapper">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div className="contact-item-details">
+                  <h4>WHATSAPP / TELEPON</h4>
+                  <p>+62 877-8239-0705</p>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <div className="contact-icon-wrapper">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div className="contact-item-details">
+                  <h4>LOKASI</h4>
+                  <p>Pancoran, Jakarta Selatan</p>
+                </div>
               </div>
             </div>
 
-            <div className="contact-item">
-              <div className="contact-icon-wrapper">
-                <Phone className="w-5 h-5" />
-              </div>
-              <div className="contact-item-details">
-                <h4>Telepon / WhatsApp</h4>
-                <p>+62 877-8239-0705</p>
-              </div>
-            </div>
-
-            <div className="contact-item">
-              <div className="contact-icon-wrapper">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div className="contact-item-details">
-                <h4>Lokasi</h4>
-                <p>Pancoran, Jakarta Selatan</p>
-              </div>
-            </div>
-
-            <div className="social-links-container">
-              <h4>Ikuti Saya</h4>
+            <div className="social-links-block">
+              <h4>JARINGAN SOSIAL</h4>
               <div className="social-links">
                 <a 
                   href="https://www.instagram.com/ikliladay/" 
@@ -102,7 +107,7 @@ export default function Contact() {
                   rel="noopener noreferrer" 
                   title="Instagram"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
@@ -116,7 +121,7 @@ export default function Contact() {
                   rel="noopener noreferrer" 
                   title="GitHub"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
                     <path d="M9 18c-4.51 2-5-2-7-2"/>
                   </svg>
@@ -129,7 +134,7 @@ export default function Contact() {
                   rel="noopener noreferrer" 
                   title="LinkedIn"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
                     <rect width="4" height="12" x="2" y="9"/>
                     <circle cx="4" cy="4" r="2"/>
@@ -142,7 +147,7 @@ export default function Contact() {
           <form id="contact-form" onSubmit={handleSubmit} className="contact-form">
             {formSuccess && (
               <div id="form-success" className="form-success-msg">
-                Pesan Anda berhasil dikirim! Saya akan segera menghubungi Anda.
+                Pesan Anda berhasil dikirim! Saya akan segera merespons Anda.
               </div>
             )}
 
@@ -178,7 +183,7 @@ export default function Contact() {
                 type="text" 
                 id="subject" 
                 name="subject" 
-                placeholder="Topik pesan" 
+                placeholder="Topik atau keperluan" 
                 value={formState.subject} 
                 onChange={handleChange} 
                 required 
