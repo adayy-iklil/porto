@@ -1081,145 +1081,177 @@ a {
   color: var(--text-muted);
 }
 
+
 /* ==================================================
-   CV MODAL (Light Theme Editorial)
+   EXACT DOCUMENT CV STYLING
    ================================================== */
-.cv-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background-color: rgba(24, 24, 27, 0.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-normal);
+.cv-paper {
+  background-color: #FFFFFF;
+  color: #111111;
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  padding: 2.5rem 3rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  line-height: 1.45;
+  font-size: 0.95rem;
 }
 
-.cv-modal-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+.cv-paper-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-.cv-modal-box {
-  background-color: var(--bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  width: 100%;
-  max-width: 860px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+.cv-name {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #A31D1D;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
 }
 
-.cv-modal-header {
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--color-border);
+.cv-contact-info {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: 0.9rem;
+  color: #111111;
+}
+
+.cv-contact-info a {
+  color: #111111;
+  text-decoration: underline;
+}
+
+.cv-paper-section {
+  margin-bottom: 1.5rem;
+}
+
+.cv-section-title {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #A31D1D;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid #A31D1D;
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.cv-summary-text {
+  color: #111111;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.cv-edu-block {
+  margin-bottom: 0.5rem;
+}
+
+.cv-sub-text {
+  margin-left: 1.5rem;
+  margin-top: 0.15rem;
+  margin-bottom: 0.4rem;
+  color: #222222;
+}
+
+.cv-bullet-list {
+  list-style-type: disc;
+  padding-left: 1.4rem;
+  margin: 0.25rem 0;
+}
+
+.cv-bullet-list li {
+  margin-bottom: 0.35rem;
+  color: #111111;
+  font-size: 0.9375rem;
+}
+
+.cv-arrow-list {
+  list-style: none;
+  padding-left: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.cv-arrow-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.9375rem;
+  color: #111111;
+}
+
+.cv-arrow-list li::before {
+  content: '➢';
+  position: absolute;
+  left: 0;
+  color: #111111;
+  font-size: 0.85rem;
+}
+
+.cv-item-block {
+  margin-bottom: 1rem;
+}
+
+.cv-item-header-row {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background-color: var(--bg-primary);
+  align-items: baseline;
+  margin-bottom: 0.25rem;
 }
 
-.cv-modal-header h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
+.cv-item-title {
+  font-size: 0.95rem;
+  color: #111111;
+}
+
+.cv-item-date {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.cv-skills-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.cv-skill-col-title {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111111;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.cv-modal-actions {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .cv-close-btn {
-  background: none;
+  background: transparent;
   border: none;
-  font-size: 1.5rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   cursor: pointer;
-  padding: 0 0.5rem;
-  line-height: 1;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
 }
 
 .cv-close-btn:hover {
   color: var(--text-primary);
+  background-color: var(--bg-muted);
 }
 
-.cv-modal-body {
-  padding: 2rem;
-  overflow-y: auto;
-}
-
-.cv-paper {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  font-size: 0.9375rem;
-  color: var(--text-primary);
-}
-
-.cv-paper-header {
-  border-bottom: 2px solid var(--text-primary);
-  padding-bottom: 1rem;
-}
-
-.cv-paper-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.25rem;
-}
-
-.cv-paper-header p {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-}
-
-.cv-paper-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.cv-paper-section h3 {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-accent);
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 0.25rem;
-
-}
-
-.cv-item-block {
-  margin-bottom: 0.5rem;
-}
-
-.cv-item-date {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  float: right;
-}
-
-.cv-paper ul {
-  padding-left: 1.25rem;
-  margin-top: 0.25rem;
-}
-
-.cv-paper li {
-  margin-bottom: 0.25rem;
-  color: var(--text-secondary);
-}
-
-.cv-skills-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
 
 /* ==================================================
    RESPONSIVE DESIGN AUDIT
