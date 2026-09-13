@@ -1088,7 +1088,7 @@ a {
 .cv-paper {
   background-color: #FFFFFF;
   color: #111111;
-  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-family: 'Roboto', 'Inter', sans-serif;
   padding: 2.5rem 3rem;
   border-radius: var(--radius-sm);
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
@@ -1102,7 +1102,7 @@ a {
 }
 
 .cv-name {
-  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-family: 'Roboto', 'Inter', sans-serif;
   font-size: 2.2rem;
   font-weight: 700;
   color: #A31D1D;
@@ -1111,7 +1111,7 @@ a {
 }
 
 .cv-contact-info {
-  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-family: 'Roboto', 'Inter', sans-serif;
   font-size: 0.9rem;
   color: #111111;
 }
@@ -1126,7 +1126,7 @@ a {
 }
 
 .cv-section-title {
-  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-family: 'Roboto', 'Inter', sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   color: #A31D1D;
@@ -1220,7 +1220,7 @@ a {
 }
 
 .cv-skill-col-title {
-  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-family: 'Roboto', 'Inter', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   color: #111111;
