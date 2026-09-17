@@ -54,7 +54,7 @@ export default function Projects() {
       role: 'Frontend Developer',
       stack: ['React.js', 'Laravel API', 'MySQL'],
       type: 'Web Application',
-      year: '2025',
+      year: '2026',
       image: '/assets/adomscoring.png',
       demo: 'https://adomscoring.my.id'
     }
