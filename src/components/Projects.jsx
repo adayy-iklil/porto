@@ -28,7 +28,7 @@ export default function Projects() {
     {
       id: 3,
       title: 'SIX-PRESENCE (Absensi Digital)',
-      desc: 'Sistem presensi digital siswa & guru SMKN 6 Jakarta dengan otentikasi akun serta rekapitulasi data absensi real-time.',
+      desc: 'Sistem presensi digital siswa & guru dengan otentikasi akun serta rekapitulasi data absensi real-time.',
       role: 'Fullstack Developer',
       stack: ['Laravel', 'MySQL', 'Bootstrap'],
       type: 'Web Application',
