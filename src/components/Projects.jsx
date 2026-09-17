@@ -16,6 +16,17 @@ export default function Projects() {
     },
     {
       id: 2,
+      title: 'ADOM SCORING (E-Ticketing System)',
+      desc: 'Platform e-ticketing & rekapitulasi skor Paskibra berbasis web modern dengan integrasi RESTful API.',
+      role: 'Frontend Developer',
+      stack: ['React.js', 'Laravel API', 'MySQL'],
+      type: 'Web Application',
+      year: '2026',
+      image: '/assets/adomscoring.png',
+      demo: 'https://adomscoring.my.id'
+    },
+    {
+      id: 3,
       title: 'SIX-PRESENCE (Absensi Digital)',
       desc: 'Sistem presensi digital siswa & guru SMKN 6 Jakarta dengan otentikasi akun serta rekapitulasi data absensi real-time.',
       role: 'Fullstack Developer',
@@ -26,7 +37,7 @@ export default function Projects() {
       demo: 'https://absenam.free.nf/login'
     },
     {
-      id: 3,
+      id: 4,
       title: 'KantinHub (Canteen & POS System)',
       desc: 'Sistem informasi kantin & kasir POS dengan grafik tren penjualan 7 hari, manajemen stok, dan basis data Supabase.',
       role: 'Frontend & System Design',
@@ -35,17 +46,6 @@ export default function Projects() {
       year: '2026',
       image: '/assets/kantinhub.png',
       demo: 'https://kantinhub6.netlify.app'
-    },
-    {
-      id: 4,
-      title: 'ADOM SCORING (E-Ticketing System)',
-      desc: 'Platform e-ticketing & rekapitulasi skor Paskibra berbasis web modern dengan integrasi RESTful API.',
-      role: 'Frontend Developer',
-      stack: ['React.js', 'Laravel API', 'MySQL'],
-      type: 'Web Application',
-      year: '2026',
-      image: '/assets/adomscoring.png',
-      demo: 'https://adomscoring.my.id'
     }
   ];
 
