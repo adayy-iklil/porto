@@ -6,7 +6,7 @@ export default function Projects() {
     {
       id: 1,
       title: 'Ace Energy Service',
-      desc: 'Solusi PV surya EPC hingga O&M. Website profil perusahaan dengan katalog produk, estimasi hemat listrik, & portofolio.',
+      desc: 'Solusi PV surya EPC hingga O&M. Website profil perusahaan dengan katalog produk & portofolio.',
       role: 'Frontend Developer',
       stack: ['React.js', 'Vanilla CSS', 'UI/UX'],
       type: 'Company Profile',
