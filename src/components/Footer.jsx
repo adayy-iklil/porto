@@ -4,8 +4,6 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-container">
-        <p className="footer-copyright">&copy; 2026 Iklil Badar. All rights reserved.</p>
-
         <div className="social-links footer-socials">
           <a 
             href="https://www.instagram.com/ikliladay/" 
@@ -50,9 +48,7 @@ export default function Footer() {
           </a>
         </div>
 
-        <p className="footer-built">
-          Quiet Engineering Architecture · React.js & Modern CSS
-        </p>
+        <p className="footer-copyright">&copy; 2026 Iklil Badar. All rights reserved.</p>
       </div>
     </footer>
   );
