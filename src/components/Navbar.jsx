@@ -89,9 +89,7 @@ export default function Navbar({ onOpenCv }) {
             >
               Iklil Badar
             </a>
-            <span className="nav-status-badge">
-              <span className="status-dot"></span> Available for opportunities
-            </span>
+            
           </div>
 
           {/* Desktop Nav */}
