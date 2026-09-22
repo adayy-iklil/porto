@@ -15,15 +15,15 @@ export default function CvModal({ isOpen, onClose }) {
       <div className="cv-modal-box" onClick={(e) => e.stopPropagation()}>
         <div className="cv-modal-header">
           <h3>
-            <FileText className="w-4 h-4 inline mr-2" style={{ color: 'var(--color-accent)', verticalAlign: 'middle' }} /> 
+            <FileText className="w-4 h-4 inline mr-2" style={{ color: 'var(--color-accent)', verticalAlign: 'middle' }} />
             Curriculum Vitae — Iklil Badar
           </h3>
           <div className="cv-modal-actions">
-            <a 
-              href="/cv.pdf" 
-              download="Iklil_Badar_CV.pdf" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="/cv.pdf"
+              download="Iklil_Badar_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-accent btn-sm"
               style={{ textDecoration: 'none' }}
             >
@@ -73,11 +73,11 @@ export default function CvModal({ isOpen, onClose }) {
             {/* PROJEK & PENGALAMAN */}
             <div className="cv-paper-section">
               <h2 className="cv-section-title">PROJEK & PENGALAMAN</h2>
-              
+
               <div className="cv-item-block">
                 <div className="cv-item-header-row">
                   <span className="cv-item-title">
-                    <strong>Frontend Web Developer – PT. Ace Service Energy (aceenergyservice.com)</strong>
+                    <strong>Frontend Web Developer – PT. Ace Service Energy</strong>
                   </span>
                   <span className="cv-item-date">Jun – Jul 2026</span>
                 </div>
@@ -91,7 +91,7 @@ export default function CvModal({ isOpen, onClose }) {
               <div className="cv-item-block">
                 <div className="cv-item-header-row">
                   <span className="cv-item-title">
-                    <strong>Frontend Web Developer – Adom Scoring (adomscoring.my.id)</strong>
+                    <strong>Frontend Web Developer – Adom Scoring</strong>
                   </span>
                   <span className="cv-item-date">Aug 2025</span>
                 </div>
