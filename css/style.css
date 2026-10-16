@@ -943,47 +943,31 @@ body.dark-theme .home__profile-frame {
 }
 
 .skills__list {
-  row-gap: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem .85rem;
   margin-top: 1.5rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--card-border);
 }
 
-.skills__titles {
+.skills__item {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: var(--mb-0-5);
+  align-items: center;
+  gap: .65rem;
+}
+
+.skills__item-icon {
+  font-size: 1.2rem;
+  color: var(--first-color);
+  flex-shrink: 0;
 }
 
 .skills__name {
   font-size: var(--normal-font-size);
   font-weight: var(--font-medium);
   color: var(--title-color);
-}
-
-.skills__number {
-  font-size: var(--small-font-size);
-  font-weight: var(--font-semi-bold);
-  color: var(--first-color);
-}
-
-.skills__bar {
-  height: 6px;
-  border-radius: .5rem;
-  background-color: var(--first-color-lighter);
-  overflow: hidden;
-}
-
-body.dark-theme .skills__bar {
-  background-color: hsl(var(--hue-color), 29%, 25%);
-}
-
-.skills__percentage {
-  display: block;
-  height: 100%;
-  border-radius: .5rem;
-  background-color: var(--first-color);
-  transition: width .8s ease;
+  line-height: 1.35;
 }
 
 .skills__close .skills__list {

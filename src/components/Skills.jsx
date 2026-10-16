@@ -16,11 +16,11 @@ export default function Skills() {
       subtitle: 'Pengembangan antarmuka web',
       icon: 'uil-brackets-curly',
       skills: [
-        { name: 'HTML5 & CSS3', percentage: '90%' },
-        { name: 'JavaScript (ES6+)', percentage: '80%' },
-        { name: 'React.js', percentage: '80%' },
-        { name: 'Tailwind CSS', percentage: '75%' },
-        { name: 'Bootstrap / UI', percentage: '85%' },
+        'HTML5 & CSS3',
+        'JavaScript (ES6+)',
+        'React.js',
+        'Tailwind CSS',
+        'Bootstrap / UI',
       ],
     },
     {
@@ -28,10 +28,11 @@ export default function Skills() {
       subtitle: 'Logika & arsitektur server',
       icon: 'uil-server-network',
       skills: [
-        { name: 'PHP Native', percentage: '80%' },
-        { name: 'Laravel Framework', percentage: '75%' },
-        { name: 'C# (Windows Forms)', percentage: '75%' },
-        { name: 'RESTful API Integration', percentage: '80%' },
+        'PHP & Laravel',
+        'C# (Windows Forms)',
+        'Python',
+        'RESTful API',
+        'Godot & Unity',
       ],
     },
     {
@@ -39,11 +40,11 @@ export default function Skills() {
       subtitle: 'Manajemen basis data & perkakas',
       icon: 'uil-database',
       skills: [
-        { name: 'MySQL / MariaDB', percentage: '85%' },
-        { name: 'SQL Server', percentage: '70%' },
-        { name: 'Supabase Cloud', percentage: '75%' },
-        { name: 'Git & GitHub', percentage: '80%' },
-        { name: 'VS Code & Figma', percentage: '85%' },
+        'MySQL & SQL Server',
+        'Supabase Cloud',
+        'Git & GitHub',
+        'VS Code & Antigravity IDE',
+        'Figma & Canva',
       ],
     },
   ];
@@ -75,19 +76,11 @@ export default function Skills() {
                 <i className="uil uil-angle-down skills__arrow"></i>
               </div>
 
-              <div className="skills__list grid">
-                {group.skills.map((skill, sIdx) => (
-                  <div key={sIdx} className="skills__data">
-                    <div className="skills__titles">
-                      <h4 className="skills__name">{skill.name}</h4>
-                      <span className="skills__number">{skill.percentage}</span>
-                    </div>
-                    <div className="skills__bar">
-                      <span
-                        className="skills__percentage"
-                        style={{ width: skill.percentage }}
-                      ></span>
-                    </div>
+              <div className="skills__list">
+                {group.skills.map((skillName, sIdx) => (
+                  <div key={sIdx} className="skills__item">
+                    <i className="uil uil-check-circle skills__item-icon"></i>
+                    <h4 className="skills__name">{skillName}</h4>
                   </div>
                 ))}
               </div>
