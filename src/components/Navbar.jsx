@@ -11,7 +11,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
     { href: '#skills', label: 'Skills', icon: 'uil-file-alt', id: 'skills' },
     { href: '#qualification', label: 'Qualification', icon: 'uil-graduation-cap', id: 'qualification' },
     { href: '#services', label: 'Services', icon: 'uil-briefcase-alt', id: 'services' },
-    { href: '#portfolio', label: 'Portfolio', icon: 'uil-scenery', id: 'portfolio' },
+    { href: '#project', label: 'Project', icon: 'uil-scenery', id: 'project' },
     { href: '#contact', label: 'Contact', icon: 'uil-message', id: 'contact' },
   ];
 
