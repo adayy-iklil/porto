@@ -29,7 +29,7 @@ export default function About({ onOpenCv }) {
 
             <div className="about__info-box">
               <span className="about__info-title">1</span>
-              <span className="about__info-name">Kesiapan <br /> Magang</span>
+              <span className="about__info-name">Magang <br /></span>
             </div>
           </div>
 
