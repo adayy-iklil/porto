@@ -20,7 +20,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
       const scrollY = window.pageYOffset;
       setIsScrolled(scrollY >= 50);
 
-      const sections = ['home', 'about', 'skills', 'qualification', 'services', 'portfolio', 'contact'];
+      const sections = ['home', 'about', 'skills', 'qualification', 'services', 'project', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
         const section = document.getElementById(sectionId);
