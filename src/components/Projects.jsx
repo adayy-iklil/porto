@@ -40,7 +40,7 @@ export default function Projects() {
     <>
       {/*==================== PORTFOLIO ====================*/}
       <section className="portfolio section" id="portfolio">
-        <h2 className="section__title">Portfolio</h2>
+        <h2 className="section__title">Project</h2>
         <span className="section__subtitle">Most recent work</span>
 
         <div className="portfolio__container container">
