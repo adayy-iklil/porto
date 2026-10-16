@@ -1,6 +1,9 @@
 import React from 'react';
+import { useDraggablePhoto } from '../hooks/useDraggablePhoto';
 
 export default function About({ onOpenCv }) {
+  const { isDragging, dragProps } = useDraggablePhoto();
+
   return (
     <section className="about section" id="about">
       <h2 className="section__title">About Me</h2>
@@ -8,7 +11,21 @@ export default function About({ onOpenCv }) {
 
       <div className="about__container container grid">
         <div className="about__img-wrapper">
-          <img src="/assets/avatar.jpg" alt="Iklil Badar" className="about__img" />
+          <div
+            className={`about__draggable-box ${isDragging ? 'is-dragging' : ''}`}
+            {...dragProps}
+          >
+            <img
+              src="/assets/avatar.jpg"
+              alt="Iklil Badar"
+              className="about__img"
+              draggable="false"
+            />
+            <span className="about__drag-hint">
+              <i className={`uil ${isDragging ? 'uil-smile' : 'uil-arrows-alt'}`}></i>{' '}
+              {isDragging ? 'Wuuush! Jalan-jalan' : 'Tahan & geser foto'}
+            </span>
+          </div>
         </div>
 
         <div className="about__data">

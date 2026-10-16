@@ -1,6 +1,9 @@
 import React from 'react';
+import { useDraggablePhoto } from '../hooks/useDraggablePhoto';
 
 export default function Hero() {
+  const { isDragging, dragProps } = useDraggablePhoto();
+
   return (
     <section className="home section" id="home">
       <div className="home__container container grid">
@@ -47,14 +50,22 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="home__img-wrapper">
-            <div className="home__profile-frame">
+          <div className="home__img-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div
+              className={`home__profile-frame ${isDragging ? 'is-dragging' : ''}`}
+              {...dragProps}
+            >
               <img
                 src="/assets/avatar.jpg"
                 alt="Iklil Badar"
                 className="home__profile-img"
+                draggable="false"
               />
             </div>
+            <span className="home__drag-hint">
+              <i className={`uil ${isDragging ? 'uil-smile' : 'uil-arrows-alt'}`}></i>{' '}
+              {isDragging ? 'Wuuush! Jalan-jalan' : 'Tahan & geser foto'}
+            </span>
           </div>
 
           <div className="home__data">
