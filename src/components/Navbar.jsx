@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const isClickScrolling = useRef(false);
+  const scrollTimeout = useRef(null);
 
   const navLinks = [
     { href: '#home', label: 'Home', icon: 'uil-estate', id: 'home' },
@@ -20,14 +23,19 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
       const scrollY = window.pageYOffset;
       setIsScrolled(scrollY >= 35);
 
-      const sections = ['home', 'about', 'skills', 'qualification', 'services', 'project', 'portfolio', 'contact'];
+      if (isClickScrolling.current) return;
+
+      const sections = ['home', 'about', 'skills', 'qualification', 'services', 'project', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
-        const section = document.getElementById(sectionId);
+        const section =
+          document.getElementById(sectionId) ||
+          (sectionId === 'project' ? document.getElementById('portfolio') : null);
+
         if (section) {
           const sectionTop = section.offsetTop - 120;
           if (scrollY >= sectionTop) {
-            setActiveNav(sectionId === 'portfolio' ? 'project' : sectionId);
+            setActiveNav(sectionId);
             break;
           }
         }
@@ -35,13 +43,23 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
   }, []);
 
   const handleNavClick = (e, id) => {
     if (e && e.preventDefault) e.preventDefault();
     setActiveNav(id);
     setIsMenuOpen(false);
+
+    // Prevent scroll spy from jumping back and forth during smooth scroll
+    isClickScrolling.current = true;
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 800);
 
     const target =
       document.getElementById(id) ||
@@ -76,12 +94,8 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
         {/* Mobile Dropdown / Slide Menu */}
         <div className={`nav__menu ${isMenuOpen ? 'show-menu' : ''}`} id="nav-menu">
           <ul className="nav__list">
-            {navLinks.map((item, idx) => (
-              <li
-                key={item.id}
-                className="nav__item"
-                style={{ '--item-index': idx }}
-              >
+            {navLinks.map((item) => (
+              <li key={item.id} className="nav__item">
                 <a
                   href={item.href}
                   className={`nav__link ${activeNav === item.id ? 'active-link' : ''}`}
@@ -92,10 +106,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
                 </a>
               </li>
             ))}
-            <li
-              className="nav__item nav__item-mobile-cv"
-              style={{ '--item-index': navLinks.length }}
-            >
+            <li className="nav__item nav__item-mobile-cv">
               <button
                 type="button"
                 onClick={() => {
@@ -119,7 +130,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
         </div>
 
         <div className="nav__btns">
-          {/* Animated Theme toggle button */}
+          {/* Theme toggle button */}
           <button
             type="button"
             className="nav__theme-btn"
@@ -139,7 +150,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
           </button>
 
           <div
-            className={`nav__toggle ${isMenuOpen ? 'is-active' : ''}`}
+            className="nav__toggle"
             id="nav-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Tutup menu' : 'Buka menu navigasi'}
