@@ -25,8 +25,8 @@ export default function ScrollUp() {
   };
 
   return (
-    <a
-      href="#home"
+    <button
+      type="button"
       onClick={scrollToTop}
       className={`scrollup ${showScroll ? 'show-scroll' : ''}`}
       id="scroll-up"
@@ -34,6 +34,6 @@ export default function ScrollUp() {
       aria-label="Scroll to top"
     >
       <i className="uil uil-arrow-up scrollup__icon"></i>
-    </a>
+    </button>
   );
 }
