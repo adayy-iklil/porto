@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 export default function Projects() {
   const projectsList = [
@@ -98,10 +97,10 @@ export default function Projects() {
                 <p className="project__description">
                   Hubungi saya sekarang dan mari diskusikan bagaimana saya dapat membantu membangun sistem website, desktop, atau database Anda.
                 </p>
-                <Link to="/contact" className="button button--flex button--white">
+                <a href="#contact" className="button button--flex button--white">
                   Contact Me
                   <i className="uil uil-message project__icon button__icon"></i>
-                </Link>
+                </a>
               </div>
 
               <img

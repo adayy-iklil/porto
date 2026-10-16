@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useDraggablePhoto } from '../hooks/useDraggablePhoto';
 
 export default function Hero() {
@@ -76,22 +75,22 @@ export default function Hero() {
               Siswa SMKN 6 Jakarta yang membangun sistem informasi sekolah, platform e-ticketing, dan aplikasi kasir yang benar-benar digunakan—dari database sampai tampilan.
             </p>
             <div className="home__buttons">
-              <Link to="/contact" className="button button--flex">
+              <a href="#contact" className="button button--flex">
                 Contact Me <i className="uil uil-message button__icon"></i>
-              </Link>
-              <Link to="/project" className="button button--white button--flex home__button-secondary">
+              </a>
+              <a href="#project" className="button button--white button--flex home__button-secondary">
                 View Projects <i className="uil uil-arrow-right button__icon"></i>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
 
         <div className="home__scroll">
-          <Link to="/about" className="home__scroll-button button--flex">
+          <a href="#about" className="home__scroll-button button--flex">
             <i className="uil uil-mouse-alt home__scroll-mouse"></i>
             <span className="home__scroll-name">Scroll down</span>
             <i className="uil uil-arrow-down home__scroll-arrow"></i>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

@@ -1,56 +1,74 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
 
   const navLinks = [
-    { to: '/', label: 'Home', icon: 'uil-estate', id: 'home' },
-    { to: '/about', label: 'About', icon: 'uil-user', id: 'about' },
-    { to: '/skills', label: 'Skills', icon: 'uil-file-alt', id: 'skills' },
-    { to: '/qualification', label: 'Qualification', icon: 'uil-graduation-cap', id: 'qualification' },
-    { to: '/services', label: 'Services', icon: 'uil-briefcase-alt', id: 'services' },
-    { to: '/project', label: 'Project', icon: 'uil-scenery', id: 'project' },
-    { to: '/contact', label: 'Contact', icon: 'uil-message', id: 'contact' },
+    { href: '#home', label: 'Home', icon: 'uil-estate', id: 'home' },
+    { href: '#about', label: 'About', icon: 'uil-user', id: 'about' },
+    { href: '#skills', label: 'Skills', icon: 'uil-file-alt', id: 'skills' },
+    { href: '#qualification', label: 'Qualification', icon: 'uil-graduation-cap', id: 'qualification' },
+    { href: '#services', label: 'Services', icon: 'uil-briefcase-alt', id: 'services' },
+    { href: '#project', label: 'Project', icon: 'uil-scenery', id: 'project' },
+    { href: '#contact', label: 'Contact', icon: 'uil-message', id: 'contact' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.pageYOffset >= 30);
+      const scrollY = window.pageYOffset;
+      setIsScrolled(scrollY >= 50);
+
+      const sections = ['home', 'about', 'skills', 'qualification', 'services', 'project', 'portfolio', 'contact'];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionId = sections[i];
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const sectionTop = section.offsetTop - 120;
+          if (scrollY >= sectionTop) {
+            setActiveNav(sectionId === 'portfolio' ? 'project' : sectionId);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isActive = (item) => {
-    if (item.to === '/') {
-      return location.pathname === '/';
-    }
-    return (
-      location.pathname === item.to ||
-      (item.id === 'project' && location.pathname === '/portfolio')
-    );
-  };
-
-  const closeMenu = () => {
+  const handleNavClick = (e, id) => {
+    if (e && e.preventDefault) e.preventDefault();
+    setActiveNav(id);
     setIsMenuOpen(false);
+
+    const target =
+      document.getElementById(id) ||
+      (id === 'project' ? document.getElementById('portfolio') : null) ||
+      (id === 'portfolio' ? document.getElementById('project') : null);
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
   };
 
   return (
     <header className={`header ${isScrolled ? 'scroll-header' : ''}`} id="header">
       <nav className="nav container">
-        <Link to="/" className="nav__logo" onClick={closeMenu}>
+        <a href="#home" className="nav__logo" onClick={(e) => handleNavClick(e, 'home')}>
           Iklil Badar
-        </Link>
+        </a>
 
         {/* Mobile Backdrop Overlay */}
         {isMenuOpen && (
           <div
             className="nav__backdrop"
-            onClick={closeMenu}
+            onClick={() => setIsMenuOpen(false)}
             aria-hidden="true"
           ></div>
         )}
@@ -60,21 +78,21 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
           <ul className="nav__list">
             {navLinks.map((item) => (
               <li key={item.id} className="nav__item">
-                <Link
-                  to={item.to}
-                  className={`nav__link ${isActive(item) ? 'active-link' : ''}`}
-                  onClick={closeMenu}
+                <a
+                  href={item.href}
+                  className={`nav__link ${activeNav === item.id ? 'active-link' : ''}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
                 >
                   <i className={`uil ${item.icon} nav__icon`}></i>
                   <span className="nav__name">{item.label}</span>
-                </Link>
+                </a>
               </li>
             ))}
             <li className="nav__item nav__item-mobile-cv">
               <button
                 type="button"
                 onClick={() => {
-                  closeMenu();
+                  setIsMenuOpen(false);
                   onOpenCv();
                 }}
                 className="nav__link nav__link-btn"
@@ -88,7 +106,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
           <i
             className="uil uil-times nav__close"
             id="nav-close"
-            onClick={closeMenu}
+            onClick={() => setIsMenuOpen(false)}
             aria-label="Tutup menu"
           ></i>
         </div>
