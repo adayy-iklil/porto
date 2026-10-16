@@ -864,15 +864,23 @@ body.dark-theme .home__profile-frame {
   gap: 1rem;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 850px) {
   .about__container {
     grid-template-columns: 1fr;
     row-gap: 2.5rem;
   }
 
+  .about__img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
   .about__img {
-    width: 220px;
-    height: 250px;
+    width: 250px;
+    height: 285px;
+    margin: 0 auto;
   }
 
   .about__description {
