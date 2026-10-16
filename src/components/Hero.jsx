@@ -72,7 +72,7 @@ export default function Hero() {
             <h1 className="home__title">Hi, I'm Iklil Badar</h1>
             <h3 className="home__subtitle">Siswa Rekayasa Perangkat Lunak (RPL)</h3>
             <p className="home__description">
-              Siswa SMKN 6 Jakarta yang membangun sistem informasi sekolah, platform e-ticketing, dan aplikasi kasir yang benar-benar digunakan—dari database sampai tampilan.
+              Siswa SMKN 6 Jakarta yang membangun sistem informasi sekolah, platform e-ticketing, dan aplikasi kasir yang benar-benar digunakan dari database sampai tampilan.
             </p>
             <div className="home__buttons">
               <a href="#contact" className="button button--flex">
