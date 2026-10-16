@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Services() {
   const [modalActive, setModalActive] = useState(null);
@@ -60,6 +60,27 @@ export default function Services() {
     },
   ];
 
+  // Prevent background scroll and support Escape key when modal is open
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setModalActive(null);
+    };
+
+    if (modalActive !== null) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [modalActive]);
+
+  const activeService = servicesData.find((s) => s.id === modalActive);
+
   return (
     <section className="services section" id="services">
       <h2 className="section__title">Services</h2>
@@ -76,47 +97,57 @@ export default function Services() {
               <p className="services__description">{service.description}</p>
             </div>
 
-            <span
+            <button
+              type="button"
               className="button button--flex button--small button--link services__button"
               onClick={() => setModalActive(service.id)}
             >
               Lihat Detail
               <i className="uil uil-arrow-right button__icon"></i>
-            </span>
-
-            <div
-              className={`services__modal ${
-                modalActive === service.id ? 'active-modal' : ''
-              }`}
-              onClick={(e) => {
-                if (e.target === e.currentTarget) setModalActive(null);
-              }}
-            >
-              <div className="services__modal-content">
-                <h4 className="services__modal-title">{service.title}</h4>
-                <i
-                  className="uil uil-times services__modal-close"
-                  onClick={() => setModalActive(null)}
-                  title="Tutup"
-                ></i>
-
-                <p className="services__modal-description">
-                  {service.description}
-                </p>
-
-                <ul className="services__modal-services grid">
-                  {service.tasks.map((task, tIdx) => (
-                    <li key={tIdx} className="services__modal-service">
-                      <i className="uil uil-check-circle services__modal-icon"></i>
-                      <p>{task}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            </button>
           </div>
         ))}
       </div>
+
+      {/* SINGLE ROOT-LEVEL MODAL (Outside card transforms to fix mobile jump/closing bug) */}
+      {activeService && (
+        <div
+          className="services__modal active-modal"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setModalActive(null);
+          }}
+        >
+          <div className="services__modal-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="services__modal-close"
+              onClick={(e) => {
+                e.stopPropagation();
+                setModalActive(null);
+              }}
+              aria-label="Tutup modal"
+              title="Tutup"
+            >
+              <i className="uil uil-times"></i>
+            </button>
+
+            <h4 className="services__modal-title">{activeService.title}</h4>
+
+            <p className="services__modal-description">
+              {activeService.description}
+            </p>
+
+            <ul className="services__modal-services grid">
+              {activeService.tasks.map((task, tIdx) => (
+                <li key={tIdx} className="services__modal-service">
+                  <i className="uil uil-check-circle services__modal-icon"></i>
+                  <p>{task}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
