@@ -67,7 +67,7 @@ export default function Hero() {
               <a href="#contact" className="button button--flex">
                 Contact Me <i className="uil uil-message button__icon"></i>
               </a>
-              <a href="#portfolio" className="button button--white button--flex home__button-secondary">
+              <a href="#project" className="button button--white button--flex home__button-secondary">
                 View Projects <i className="uil uil-arrow-right button__icon"></i>
               </a>
             </div>

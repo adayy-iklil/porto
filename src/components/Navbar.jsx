@@ -20,14 +20,14 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
       const scrollY = window.pageYOffset;
       setIsScrolled(scrollY >= 50);
 
-      const sections = ['home', 'about', 'skills', 'qualification', 'services', 'project', 'contact'];
+      const sections = ['home', 'about', 'skills', 'qualification', 'services', 'project', 'portfolio', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
         const section = document.getElementById(sectionId);
         if (section) {
           const sectionTop = section.offsetTop - 120;
           if (scrollY >= sectionTop) {
-            setActiveNav(sectionId);
+            setActiveNav(sectionId === 'portfolio' ? 'project' : sectionId);
             break;
           }
         }
@@ -38,15 +38,29 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (id) => {
+  const handleNavClick = (e, id) => {
+    if (e && e.preventDefault) e.preventDefault();
     setActiveNav(id);
     setIsMenuOpen(false);
+
+    const target =
+      document.getElementById(id) ||
+      (id === 'project' ? document.getElementById('portfolio') : null) ||
+      (id === 'portfolio' ? document.getElementById('project') : null);
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
   };
 
   return (
     <header className={`header ${isScrolled ? 'scroll-header' : ''}`} id="header">
       <nav className="nav container">
-        <a href="#home" className="nav__logo" onClick={() => handleNavClick('home')}>
+        <a href="#home" className="nav__logo" onClick={(e) => handleNavClick(e, 'home')}>
           Iklil Badar
         </a>
 
@@ -67,7 +81,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
                 <a
                   href={item.href}
                   className={`nav__link ${activeNav === item.id ? 'active-link' : ''}`}
-                  onClick={() => handleNavClick(item.id)}
+                  onClick={(e) => handleNavClick(e, item.id)}
                 >
                   <i className={`uil ${item.icon} nav__icon`}></i>
                   <span className="nav__name">{item.label}</span>

@@ -38,8 +38,9 @@ export default function Projects() {
 
   return (
     <>
-      {/*==================== PORTFOLIO ====================*/}
-      <section className="portfolio section" id="portfolio">
+      {/*==================== PORTFOLIO / PROJECT ====================*/}
+      <section className="portfolio section" id="project">
+        <span id="portfolio" style={{ position: 'absolute', pointerEvents: 'none', opacity: 0 }}></span>
         <h2 className="section__title">Project</h2>
         <span className="section__subtitle">Most recent work</span>
 

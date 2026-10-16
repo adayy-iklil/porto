@@ -19,8 +19,8 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="#portfolio" className="footer__link">
-                Portfolio
+              <a href="#project" className="footer__link">
+                Project
               </a>
             </li>
             <li>
