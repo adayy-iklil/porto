@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function Skills() {
-  const [openStates, setOpenStates] = useState({ 0: true, 1: true, 2: true });
+  const [openStates, setOpenStates] = useState({ 0: false, 1: false, 2: false });
 
   const toggleAccordion = (index) => {
     setOpenStates((prev) => ({

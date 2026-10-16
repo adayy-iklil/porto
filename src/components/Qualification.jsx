@@ -80,7 +80,7 @@ export default function Qualification() {
             <div className="qualification__data">
               <div className="qualification__item-data">
                 <h3 className="qualification__title">Sekolah Menengah Pertama</h3>
-                <span className="qualification__subtitle">SMP Negeri 141 Jakarta</span>
+                <span className="qualification__subtitle">MTS Al-Islamiyah</span>
                 <div className="qualification__calendar">
                   <i className="uil uil-calendar-alt"></i> 2021 - 2024
                 </div>

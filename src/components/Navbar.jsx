@@ -50,6 +50,15 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
           Iklil Badar
         </a>
 
+        {/* Mobile Backdrop Overlay */}
+        {isMenuOpen && (
+          <div
+            className="nav__backdrop"
+            onClick={() => setIsMenuOpen(false)}
+            aria-hidden="true"
+          ></div>
+        )}
+
         {/* Mobile Dropdown / Slide Menu */}
         <div className={`nav__menu ${isMenuOpen ? 'show-menu' : ''}`} id="nav-menu">
           <ul className="nav__list">
@@ -110,9 +119,10 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
             className="nav__toggle"
             id="nav-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Buka menu navigasi"
+            aria-label={isMenuOpen ? 'Tutup menu' : 'Buka menu navigasi'}
+            title={isMenuOpen ? 'Tutup' : 'Menu'}
           >
-            <i className="uil uil-apps"></i>
+            <i className={`uil ${isMenuOpen ? 'uil-times' : 'uil-bars'}`}></i>
           </div>
         </div>
       </nav>

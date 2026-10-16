@@ -18,18 +18,18 @@ export default function About({ onOpenCv }) {
 
           <div className="about__info">
             <div className="about__info-box">
-              <span className="about__info-title">02+</span>
+              <span className="about__info-title">2+</span>
               <span className="about__info-name">Tahun <br /> Pembelajaran</span>
             </div>
 
             <div className="about__info-box">
-              <span className="about__info-title">04+</span>
+              <span className="about__info-title">4+</span>
               <span className="about__info-name">Proyek <br /> Selesai</span>
             </div>
 
             <div className="about__info-box">
-              <span className="about__info-title">01</span>
-              <span className="about__info-name">Kesiapan <br /> PKL / Magang</span>
+              <span className="about__info-title">1</span>
+              <span className="about__info-name">Kesiapan <br /> Magang</span>
             </div>
           </div>
 

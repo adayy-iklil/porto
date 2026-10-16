@@ -91,7 +91,7 @@ export default function Projects() {
             <div className="project__container">
               <div className="project__data">
                 <h2 className="project__title">
-                  Punya tawaran PKL atau proyek aplikasi?
+                  Punya tawaran magang atau proyek aplikasi?
                 </h2>
                 <p className="project__description">
                   Hubungi saya sekarang dan mari diskusikan bagaimana saya dapat membantu membangun sistem website, desktop, atau database Anda.
