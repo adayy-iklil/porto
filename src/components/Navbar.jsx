@@ -4,6 +4,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const navLinks = [
     { href: '#home', label: 'Home', icon: 'uil-estate', id: 'home' },
@@ -18,7 +19,13 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.pageYOffset;
-      setIsScrolled(scrollY >= 50);
+      setIsScrolled(scrollY >= 35);
+
+      // Calculate reading scroll progress
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollProgress(Math.min(100, Math.max(0, (scrollY / totalHeight) * 100)));
+      }
 
       const sections = ['home', 'about', 'skills', 'qualification', 'services', 'project', 'portfolio', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -59,9 +66,17 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
 
   return (
     <header className={`header ${isScrolled ? 'scroll-header' : ''}`} id="header">
+      {/* Cool Gradient Scroll Progress Bar */}
+      <div
+        className="nav__progress-bar"
+        style={{ width: `${scrollProgress}%` }}
+        aria-hidden="true"
+      ></div>
+
       <nav className="nav container">
         <a href="#home" className="nav__logo" onClick={(e) => handleNavClick(e, 'home')}>
           Iklil Badar
+          <span className="nav__logo-dot" title="Available for Internship"></span>
         </a>
 
         {/* Mobile Backdrop Overlay */}
@@ -76,8 +91,12 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
         {/* Mobile Dropdown / Slide Menu */}
         <div className={`nav__menu ${isMenuOpen ? 'show-menu' : ''}`} id="nav-menu">
           <ul className="nav__list">
-            {navLinks.map((item) => (
-              <li key={item.id} className="nav__item">
+            {navLinks.map((item, idx) => (
+              <li
+                key={item.id}
+                className="nav__item"
+                style={{ '--item-index': idx }}
+              >
                 <a
                   href={item.href}
                   className={`nav__link ${activeNav === item.id ? 'active-link' : ''}`}
@@ -88,7 +107,10 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
                 </a>
               </li>
             ))}
-            <li className="nav__item nav__item-mobile-cv">
+            <li
+              className="nav__item nav__item-mobile-cv"
+              style={{ '--item-index': navLinks.length }}
+            >
               <button
                 type="button"
                 onClick={() => {
@@ -112,14 +134,16 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
         </div>
 
         <div className="nav__btns">
-          {/* Theme change button */}
-          <i
-            className={`uil ${isDark ? 'uil-sun' : 'uil-moon'} change-theme`}
-            id="theme-button"
+          {/* Animated Theme toggle button */}
+          <button
+            type="button"
+            className="nav__theme-btn"
             onClick={onToggleTheme}
             title={isDark ? 'Mode Terang' : 'Mode Gelap'}
             aria-label="Ganti tema warna"
-          ></i>
+          >
+            <i className={`uil ${isDark ? 'uil-sun' : 'uil-moon'} change-theme`}></i>
+          </button>
 
           <button
             type="button"
@@ -130,7 +154,7 @@ export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
           </button>
 
           <div
-            className="nav__toggle"
+            className={`nav__toggle ${isMenuOpen ? 'is-active' : ''}`}
             id="nav-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Tutup menu' : 'Buka menu navigasi'}
