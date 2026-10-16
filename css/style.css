@@ -184,39 +184,24 @@ button {
   top: 0;
   left: 0;
   z-index: var(--z-fixed);
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--card-border);
-  transition: background-color .35s ease, backdrop-filter .35s ease, box-shadow .35s ease, height .35s ease;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: none;
+  transition: background-color .3s, box-shadow .3s;
 }
 
 body.dark-theme .header {
-  background-color: hsla(var(--hue-color), 28%, 12%, 0.92);
-  border-bottom-color: hsla(var(--hue-color), 20%, 25%, 0.6);
+  background-color: hsla(var(--hue-color), 28%, 12%, 0.95);
+  border-bottom: none;
 }
 
 .scroll-header {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
-  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
 }
 
 body.dark-theme .scroll-header {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, .4);
-  background-color: hsla(var(--hue-color), 28%, 10%, 0.96);
-}
-
-/* Dynamic Live Scroll Progress Bar */
-.nav__progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2.5px;
-  background: linear-gradient(90deg, var(--first-color), #8b5cf6, #ec4899);
-  box-shadow: 0 0 10px rgba(106, 89, 209, 0.6);
-  transition: width 0.12s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 10;
-  border-radius: 0 2px 2px 0;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .35);
 }
 
 .nav {
@@ -224,53 +209,21 @@ body.dark-theme .scroll-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: height .3s ease;
 }
 
-.scroll-header .nav {
-  height: calc(var(--header-height) - 0.25rem);
-}
-
-/* Animated Logo & Pulsing Status Dot */
 .nav__logo {
   color: var(--title-color);
   font-weight: var(--font-bold);
   font-size: 1.25rem;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   white-space: nowrap;
   letter-spacing: -0.02em;
-  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), color .25s ease;
+  transition: color .3s ease;
 }
 
 .nav__logo:hover {
   color: var(--first-color);
-  transform: translateY(-1px);
-}
-
-.nav__logo-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: var(--first-color);
-  border-radius: 50%;
-  margin-left: 6px;
-  animation: logoPulse 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
-}
-
-@keyframes logoPulse {
-  0% {
-    transform: scale(0.9);
-    box-shadow: 0 0 0 0 rgba(106, 89, 209, 0.65);
-  }
-  70% {
-    transform: scale(1.15);
-    box-shadow: 0 0 0 9px rgba(106, 89, 209, 0);
-  }
-  100% {
-    transform: scale(0.9);
-    box-shadow: 0 0 0 0 rgba(106, 89, 209, 0);
-  }
 }
 
 /* Desktop Nav Menu */
@@ -283,7 +236,7 @@ body.dark-theme .scroll-header {
 .nav__list {
   display: flex;
   align-items: center;
-  column-gap: 1.25rem;
+  column-gap: 1.5rem;
 }
 
 .nav__item {
@@ -295,39 +248,15 @@ body.dark-theme .scroll-header {
   color: var(--title-color);
   font-size: 0.938rem;
   font-weight: var(--font-medium);
-  padding: .45rem .65rem;
+  padding: .5rem 0;
   position: relative;
   white-space: nowrap;
   cursor: pointer;
-  border-radius: .45rem;
-  transition: color .25s ease, transform .25s ease;
-}
-
-/* Subtle background pill highlight on hover */
-.nav__link::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: .45rem;
-  background-color: var(--first-color-lighter);
-  opacity: 0;
-  transform: scale(0.85);
-  transition: opacity .25s ease, transform .25s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: -1;
-}
-
-body.dark-theme .nav__link::before {
-  background-color: hsla(var(--hue-color), 29%, 25%, 0.45);
+  transition: color .3s ease;
 }
 
 .nav__link:hover {
   color: var(--first-color);
-  transform: translateY(-1.5px);
-}
-
-.nav__link:hover::before {
-  opacity: 0.6;
-  transform: scale(1);
 }
 
 .nav__link.active-link {
@@ -335,23 +264,15 @@ body.dark-theme .nav__link::before {
   font-weight: var(--font-semi-bold);
 }
 
-/* Active link expanding underline */
-.nav__link::after {
+.nav__link.active-link::after {
   content: "";
   position: absolute;
-  bottom: 0px;
-  left: 50%;
-  width: 0%;
-  height: 2.5px;
-  background: linear-gradient(90deg, var(--first-color), #8b5cf6);
-  border-radius: 3px;
-  transform: translateX(-50%);
-  transition: width .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s ease;
-}
-
-.nav__link.active-link::after {
-  width: 65%;
-  box-shadow: 0 0 8px var(--first-color);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--first-color);
+  border-radius: 2px;
 }
 
 .nav__link-btn {
