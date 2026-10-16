@@ -1,7 +1,20 @@
-import React from 'react';
-import { FileText, Download, X } from 'lucide-react';
+import React, { useEffect } from 'react';
 
 export default function CvModal({ isOpen, onClose }) {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleBackdropClick = (e) => {
@@ -11,138 +24,155 @@ export default function CvModal({ isOpen, onClose }) {
   };
 
   return (
-    <div id="cv-modal" className="cv-modal-overlay active" onClick={handleBackdropClick}>
-      <div className="cv-modal-box" onClick={(e) => e.stopPropagation()}>
-        <div className="cv-modal-header">
-          <h3>
-            <FileText className="w-4 h-4 inline mr-2" style={{ color: 'var(--color-accent)', verticalAlign: 'middle' }} />
+    <div
+      className="services__modal active-modal"
+      onClick={handleBackdropClick}
+      style={{ zIndex: 1100 }}
+    >
+      <div
+        className="services__modal-content"
+        style={{
+          maxWidth: '720px',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          padding: '2rem 1.5rem',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '1.5rem',
+            borderBottom: '1px solid var(--first-color-lighter)',
+            paddingBottom: '0.75rem',
+          }}
+        >
+          <h4
+            className="services__modal-title"
+            style={{ margin: 0, textAlign: 'left', color: 'var(--first-color)' }}
+          >
             Curriculum Vitae — Iklil Badar
-          </h3>
-          <div className="cv-modal-actions">
+          </h4>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <a
-              href="/cv.pdf"
+              href="/assets/cv.pdf"
               download="Iklil_Badar_CV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-accent btn-sm"
-              style={{ textDecoration: 'none' }}
+              className="button button--small button--flex"
+              style={{ padding: '0.4rem 0.8rem', fontSize: '0.75rem' }}
             >
-              <Download className="w-3.5 h-3.5 mr-1 inline" /> Unduh PDF
+              <i className="uil uil-download-alt button__icon" style={{ marginLeft: 0, marginRight: '4px' }}></i>
+              PDF
             </a>
-            <button id="close-cv-modal" onClick={onClose} className="cv-close-btn" aria-label="Close modal">
-              <X className="w-5 h-5" />
-            </button>
+            <i
+              className="uil uil-times services__modal-close"
+              style={{ position: 'static', fontSize: '1.5rem' }}
+              onClick={onClose}
+            ></i>
           </div>
         </div>
 
-        <div className="cv-modal-body" id="printable-cv-content">
-          <div className="cv-paper">
-            {/* Header / Contact Line */}
-            <div className="cv-paper-header">
-              <h1 className="cv-name">Iklil Badar</h1>
-              <p className="cv-contact-info">
-                Jakarta Selatan | <a href="mailto:badariklil6@gmail.com">badariklil6@gmail.com</a> | +62 877-8239-0705
+        <div style={{ lineHeight: 1.6, color: 'var(--text-color)' }}>
+          {/* Header */}
+          <div style={{ marginBottom: '1.5rem' }}>
+            <h2 style={{ fontSize: '1.5rem', color: 'var(--title-color)' }}>
+              Iklil Badar
+            </h2>
+            <p style={{ fontSize: '0.875rem', color: 'var(--text-color-light)' }}>
+              Jakarta Selatan, Indonesia &bull; badariklil6@gmail.com &bull; +62 877-8239-0705 &bull; github.com/adayy-iklil
+            </p>
+          </div>
+
+          {/* Profil */}
+          <div style={{ marginBottom: '1.5rem' }}>
+            <h3
+              style={{
+                fontSize: '1rem',
+                color: 'var(--first-color)',
+                marginBottom: '0.5rem',
+                fontWeight: 600,
+              }}
+            >
+              RINGKASAN PROFIL
+            </h3>
+            <p style={{ fontSize: '0.875rem' }}>
+              Siswa jurusan Rekayasa Perangkat Lunak (RPL) di SMKN 6 Jakarta dengan minat tinggi dalam pengembangan web dan aplikasi perangkat lunak. Terbiasa membangun antarmuka web yang responsif, aplikasi desktop C#, dan pengelolaan basis data relasional. Siap berkontribusi secara produktif dalam lingkungan profesional melalui program PKL / Magang.
+            </p>
+          </div>
+
+          {/* Pendidikan */}
+          <div style={{ marginBottom: '1.5rem' }}>
+            <h3
+              style={{
+                fontSize: '1rem',
+                color: 'var(--first-color)',
+                marginBottom: '0.5rem',
+                fontWeight: 600,
+              }}
+            >
+              PENDIDIKAN
+            </h3>
+            <div style={{ fontSize: '0.875rem' }}>
+              <strong>SMK Negeri 6 Jakarta</strong> (2024 – Sekarang)
+              <p style={{ color: 'var(--text-color-light)' }}>
+                Jurusan: Rekayasa Perangkat Lunak (RPL)
               </p>
+              <ul style={{ paddingLeft: '1.25rem', marginTop: '0.25rem' }}>
+                <li>Mempelajari pemrograman web, algoritma & struktur data, dan basis data SQL.</li>
+                <li>Membangun aplikasi berbasis web dan desktop terintegrasi database.</li>
+              </ul>
             </div>
+          </div>
 
-            {/* RINGKASAN PROFIL */}
-            <div className="cv-paper-section">
-              <h2 className="cv-section-title">RINGKASAN PROFIL</h2>
-              <p className="cv-summary-text">
-                Siswa RPL (Rekayasa Perangkat Lunak) yang memiliki minat di bidang Software Development dan Teknologi Informasi. Berpengalaman mengembangkan website, aplikasi desktop, dan sistem berbasis database melalui berbagai proyek. Memahami dasar software development, database.
-              </p>
-            </div>
-
-            {/* PENDIDIKAN */}
-            <div className="cv-paper-section">
-              <h2 className="cv-section-title">PENDIDIKAN</h2>
-              <div className="cv-edu-block">
-                <ul className="cv-bullet-list">
-                  <li>
-                    <strong>SMK Negeri 6 Jakarta ( 2024 – Sekarang )</strong>
-                    <div className="cv-sub-text">RPL (Rekayasa Perangkat Lunak)</div>
-                    <ul className="cv-arrow-list">
-                      <li>Mempelajari pemrograman web dan basis data</li>
-                      <li>Mengembangkan aplikasi berbasis web menggunakan HTML, CSS, JavaScript, PHP, dan MySQL.</li>
-                    </ul>
-                  </li>
-                </ul>
+          {/* Pengalaman Proyek */}
+          <div style={{ marginBottom: '1.5rem' }}>
+            <h3
+              style={{
+                fontSize: '1rem',
+                color: 'var(--first-color)',
+                marginBottom: '0.5rem',
+                fontWeight: 600,
+              }}
+            >
+              PROYEK & PENGALAMAN
+            </h3>
+            <div style={{ fontSize: '0.875rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div>
+                <strong>Frontend Web Developer — PT. Ace Energy Service</strong> (2026)
+                <p>Membangun UI responsif website panel surya menggunakan React.js dan Vanilla CSS.</p>
+              </div>
+              <div>
+                <strong>Frontend Web Developer — ADOM SCORING</strong> (2026)
+                <p>Membangun platform ticketing & rekapitulasi nilai perlombaan dengan React.js dan integrasi Laravel API.</p>
+              </div>
+              <div>
+                <strong>Fullstack Developer — SIX-PRESENCE</strong> (2026)
+                <p>Sistem presensi digital harian siswa & guru berbasis Laravel, MySQL, dan Bootstrap.</p>
+              </div>
+              <div>
+                <strong>Frontend & System Design — KantinHub</strong> (2026)
+                <p>Aplikasi kasir POS kantin dengan grafik penjualan 7 hari dan database Supabase.</p>
               </div>
             </div>
+          </div>
 
-            {/* PROJEK & PENGALAMAN */}
-            <div className="cv-paper-section">
-              <h2 className="cv-section-title">PROJEK & PENGALAMAN</h2>
-
-              <div className="cv-item-block">
-                <div className="cv-item-header-row">
-                  <span className="cv-item-title">
-                    <strong>Frontend Web Developer – PT. Ace Service Energy</strong>
-                  </span>
-                  <span className="cv-item-date">Jun – Jul 2026</span>
-                </div>
-                <ul className="cv-bullet-list">
-                  <li>Membangun antarmuka pengguna (UI) responsif menggunakan React.js untuk website panel surya.</li>
-                  <li>Berkolaborasi dalam tim menggunakan GitHub untuk mengembangkan fitur Front-End dan integrasi formulir layanan.</li>
-                  <li>Mengoptimalkan performa dan pengalaman pengguna pada website.</li>
-                </ul>
-              </div>
-
-              <div className="cv-item-block">
-                <div className="cv-item-header-row">
-                  <span className="cv-item-title">
-                    <strong>Frontend Web Developer – Adom Scoring</strong>
-                  </span>
-                  <span className="cv-item-date">Aug 2025</span>
-                </div>
-                <ul className="cv-bullet-list">
-                  <li>Membangun UI responsif menggunakan React JS untuk sistem ticketing.</li>
-                  <li>Mengintegrasikan aplikasi dengan RESTful API berbasis Laravel & MySQL.</li>
-                  <li>Memastikan performa aplikasi siap produksi (production-ready) hingga tahap deployment.</li>
-                </ul>
-              </div>
-
-              <div className="cv-item-block">
-                <div className="cv-item-header-row">
-                  <span className="cv-item-title">
-                    <strong>AI Workshop – Merkle</strong>
-                  </span>
-                  <span className="cv-item-date">Jun 2026</span>
-                </div>
-                <ul className="cv-bullet-list">
-                  <li>Mengikuti pelatihan mengenai dasar-dasar Artificial Intelligence.</li>
-                  <li>Mempelajari penerapan AI dalam pengembangan teknologi.</li>
-                  <li>Berpartisipasi dalam praktik penggunaan tools berbasis AI.</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* SKILLS */}
-            <div className="cv-paper-section">
-              <h2 className="cv-section-title">SKILLS</h2>
-              <div className="cv-skills-grid">
-                <div className="cv-skill-col">
-                  <h3 className="cv-skill-col-title">KEMAMPUAN TEKNIS</h3>
-                  <ul className="cv-bullet-list">
-                    <li><strong>Bahasa Pemrograman:</strong> HTML, CSS, JS, PHP, Python, MySQL, C#</li>
-                    <li><strong>Editor code & IDE:</strong> VS Code, Visual Studio, Antigravity IDE</li>
-                    <li><strong>Framework & Version Control:</strong> Laravel, React, Git & GitHub</li>
-                    <li><strong>Game Engines:</strong> Godot, Unity</li>
-                    <li><strong>Desain UI/UX & Visual:</strong> Figma, Canva</li>
-                  </ul>
-                </div>
-
-                <div className="cv-skill-col">
-                  <h3 className="cv-skill-col-title">KEMAMPUAN PERSONAL</h3>
-                  <ul className="cv-bullet-list">
-                    <li>Berpikir Analitis & Penyelesaian Masalah</li>
-                    <li>Kolaborasi Tim & Adaptabilitas</li>
-                    <li>Adaptasi Teknologi & Tren Baru</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
+          {/* Keahlian */}
+          <div>
+            <h3
+              style={{
+                fontSize: '1rem',
+                color: 'var(--first-color)',
+                marginBottom: '0.5rem',
+                fontWeight: 600,
+              }}
+            >
+              KEAHLIAN UTAMA
+            </h3>
+            <p style={{ fontSize: '0.875rem' }}>
+              <strong>Web:</strong> HTML5, CSS3, JavaScript, React.js, Tailwind CSS, Bootstrap, PHP, Laravel<br />
+              <strong>Desktop & Database:</strong> C# (WinForms), MySQL, SQL Server, Supabase<br />
+              <strong>Tools:</strong> Git, GitHub, VS Code, Visual Studio, Figma
+            </p>
           </div>
         </div>
       </div>

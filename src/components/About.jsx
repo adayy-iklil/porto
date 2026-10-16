@@ -1,73 +1,55 @@
 import React from 'react';
-import { FileText, GraduationCap, BookOpen, MapPin, Award } from 'lucide-react';
 
 export default function About({ onOpenCv }) {
   return (
-    <section id="about" className="about-section">
-      <div className="container">
-        <div className="section-header">
-          <span className="section-label">01 / TENTANG SAYA</span>
-          <h2>Latar Belakang & Minat</h2>
-          <p className="section-title-desc">
-            Prinsip pengembangan perangkat lunak yang berfokus pada kejelasan, keandalan, dan struktur yang rapi.
-          </p>
+    <section className="about section" id="about">
+      <h2 className="section__title">About Me</h2>
+      <span className="section__subtitle">My introduction</span>
+
+      <div className="about__container container grid">
+        <div className="about__img-wrapper">
+          <img src="/assets/avatar.jpg" alt="Iklil Badar" className="about__img" />
         </div>
 
-        <div className="about-grid">
-          <div className="about-bio">
-            <h3>Pendekatan & Visi Ringkas</h3>
-            <p>
-              Saya adalah siswa Rekayasa Perangkat Lunak (RPL) di SMKN 6 Jakarta dengan ketertarikan tinggi pada proses rekayasa perangkat lunak — mulai dari konsep antarmuka hingga struktur basis data dan integrasi API.
-            </p>
-            <p>
-              Melalui kombinasi pembelajaran di sekolah dan pengerjaan proyek mandiri, saya terbiasa membangun aplikasi web responsif (React.js, PHP, Laravel) serta aplikasi desktop (C# / Windows Forms) yang terintegrasi basis data SQL.
-            </p>
-            <p>
-              Saya memiliki cara berpikir sistematis, terbiasa memecahkan kendala logika pemrograman, dan siap berkontribusi secara aktif sebagai peserta magang IT di lingkungan profesional.
-            </p>
-            <div className="about-bio-cta">
-              <button id="open-cv-about" onClick={onOpenCv} className="btn btn-primary">
-                <FileText className="w-4 h-4 mr-1 inline" /> Baca Curriculum Vitae (CV)
-              </button>
+        <div className="about__data">
+          <p className="about__description">
+            Siswa jurusan Rekayasa Perangkat Lunak (RPL) di SMKN 6 Jakarta dengan fokus pada rekayasa web, desktop, dan sistem basis data. Berpengalaman membangun aplikasi fungsional yang siap pakai mulai dari presensi sekolah, platform kasir POS, hingga e-ticketing berbasis API.
+          </p>
+
+          <div className="about__info">
+            <div className="about__info-box">
+              <span className="about__info-title">02+</span>
+              <span className="about__info-name">Tahun <br /> Pembelajaran</span>
+            </div>
+
+            <div className="about__info-box">
+              <span className="about__info-title">04+</span>
+              <span className="about__info-name">Proyek <br /> Selesai</span>
+            </div>
+
+            <div className="about__info-box">
+              <span className="about__info-title">01</span>
+              <span className="about__info-name">Kesiapan <br /> PKL / Magang</span>
             </div>
           </div>
 
-          <div className="about-meta-grid">
-            <div className="about-meta-card">
-              <div className="meta-card-header">
-                <GraduationCap className="w-4 h-4 meta-card-icon" />
-                <span className="meta-card-label">PENDIDIKAN</span>
-              </div>
-              <div className="meta-card-val">SMKN 6 Jakarta</div>
-              <p className="meta-card-desc">Jurusan Rekayasa Perangkat Lunak (RPL)</p>
-            </div>
+          <div className="about__buttons">
+            <a
+              download="Iklil_Badar_CV.pdf"
+              href="/assets/cv.pdf"
+              className="button button--flex"
+            >
+              Download CV <i className="uil uil-download-alt button__icon"></i>
+            </a>
 
-            <div className="about-meta-card">
-              <div className="meta-card-header">
-                <BookOpen className="w-4 h-4 meta-card-icon" />
-                <span className="meta-card-label">FOKUS TEKNIS</span>
-              </div>
-              <div className="meta-card-val">Software Engineering</div>
-              <p className="meta-card-desc">Web Application, Desktop & Database Systems</p>
-            </div>
-
-            <div className="about-meta-card">
-              <div className="meta-card-header">
-                <MapPin className="w-4 h-4 meta-card-icon" />
-                <span className="meta-card-label">DOMISILI</span>
-              </div>
-              <div className="meta-card-val">Jakarta, Indonesia</div>
-              <p className="meta-card-desc">DKI Jakarta, Indonesia</p>
-            </div>
-
-            <div className="about-meta-card">
-              <div className="meta-card-header">
-                <Award className="w-4 h-4 meta-card-icon" />
-                <span className="meta-card-label">STATUS</span>
-              </div>
-              <div className="meta-card-val">Internship Ready</div>
-              <p className="meta-card-desc">Siap untuk Magang / PKL Industri</p>
-            </div>
+            <button
+              type="button"
+              onClick={onOpenCv}
+              className="button button--white button--flex"
+              style={{ border: '1px solid var(--first-color)' }}
+            >
+              Lihat CV <i className="uil uil-file-alt button__icon"></i>
+            </button>
           </div>
         </div>
       </div>

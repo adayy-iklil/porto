@@ -1,168 +1,121 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Menu, X } from 'lucide-react';
 
-export default function Navbar({ onOpenCv }) {
+export default function Navbar({ onOpenCv, isDark, onToggleTheme }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = [
-    { href: '#hero', label: 'Beranda', id: 'hero' },
-    { href: '#about', label: 'Tentang', id: 'about' },
-    { href: '#skills', label: 'Keahlian', id: 'skills' },
-    { href: '#projects', label: 'Proyek', id: 'projects' },
-    { href: '#contact', label: 'Kontak', id: 'contact' },
+  const navLinks = [
+    { href: '#home', label: 'Home', icon: 'uil-estate', id: 'home' },
+    { href: '#about', label: 'About', icon: 'uil-user', id: 'about' },
+    { href: '#skills', label: 'Skills', icon: 'uil-file-alt', id: 'skills' },
+    { href: '#qualification', label: 'Qualification', icon: 'uil-graduation-cap', id: 'qualification' },
+    { href: '#services', label: 'Services', icon: 'uil-briefcase-alt', id: 'services' },
+    { href: '#portfolio', label: 'Portfolio', icon: 'uil-scenery', id: 'portfolio' },
+    { href: '#contact', label: 'Contact', icon: 'uil-message', id: 'contact' },
   ];
 
   useEffect(() => {
-    const calculateActiveSection = () => {
-      const sections = ['hero', 'about', 'skills', 'projects', 'contact'];
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight;
-      const clientHeight = document.documentElement.clientHeight;
+    const handleScroll = () => {
+      const scrollY = window.pageYOffset;
+      setIsScrolled(scrollY >= 50);
 
-      if (scrollTop <= 100) return 'hero';
-      if (scrollTop + clientHeight >= scrollHeight - 80) return 'contact';
-
-      const offsetThreshold = clientHeight * 0.45;
+      const sections = ['home', 'about', 'skills', 'qualification', 'services', 'portfolio', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= offsetThreshold) return sections[i];
+        const sectionId = sections[i];
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const sectionTop = section.offsetTop - 120;
+          if (scrollY >= sectionTop) {
+            setActiveNav(sectionId);
+            break;
+          }
         }
       }
-      return 'hero';
-    };
-
-    const handleScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      setIsScrolled(scrollTop > 20);
-      const current = calculateActiveSection();
-      setActiveSection((prev) => (prev !== current ? current : prev));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTarget = (targetId) => {
-    setActiveSection(targetId);
-    setIsMobileMenuOpen(false);
-
-    const targetEl = document.getElementById(targetId);
-    if (targetEl) {
-      const navOffset = 76;
-      const elementPosition = targetEl.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = Math.max(0, elementPosition - navOffset);
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const handleNavClick = (e, targetId) => {
-    e.preventDefault();
-    scrollToTarget(targetId);
-  };
-
-  const handleCvClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsMobileMenuOpen(false);
-    if (onOpenCv) {
-      onOpenCv();
-    }
+  const handleNavClick = (id) => {
+    setActiveNav(id);
+    setIsMenuOpen(false);
   };
 
   return (
-    <header className={`navbar-header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="container">
-        <div className="navbar-inner">
-          <div className="nav-brand-group">
-            <a 
-              href="#hero" 
-              className="nav-logo" 
-              onClick={(e) => handleNavClick(e, 'hero')}
-            >
-              Iklil Badar
-            </a>
-            
-          </div>
+    <header className={`header ${isScrolled ? 'scroll-header' : ''}`} id="header">
+      <nav className="nav container">
+        <a href="#home" className="nav__logo" onClick={() => handleNavClick('home')}>
+          Iklil Badar
+        </a>
 
-          {/* Desktop Nav */}
-          <nav className="desktop-nav" aria-label="Desktop Navigation">
-            <ul className="nav-links">
-              {navItems.map((item) => (
-                <li key={item.id} className="nav-item">
-                  <a
-                    href={item.href}
-                    className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
-                    onClick={(e) => handleNavClick(e, item.id)}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Actions & Mobile Menu Toggle */}
-          <div className="nav-actions">
-            <button 
-              type="button"
-              onClick={handleCvClick} 
-              className="btn btn-secondary btn-sm nav-cv-btn"
-              aria-label="Lihat CV"
-            >
-              <FileText className="w-3.5 h-3.5 mr-1 inline" /> CV
-            </button>
-
-            <button
-              type="button"
-              className="mobile-toggle-btn"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle navigation menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Top Dropdown Menu */}
-      {isMobileMenuOpen && (
-        <div className="mobile-dropdown-menu">
-          <div className="container">
-            <ul className="mobile-dropdown-links">
-              {navItems.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={item.href}
-                    className={`mobile-dropdown-link ${activeSection === item.id ? 'active' : ''}`}
-                    onClick={(e) => handleNavClick(e, item.id)}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-              <li>
-                <button
-                  type="button"
-                  onClick={handleCvClick}
-                  className="mobile-dropdown-link mobile-cv-link"
-                  style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer' }}
+        {/* Mobile Dropdown / Slide Menu */}
+        <div className={`nav__menu ${isMenuOpen ? 'show-menu' : ''}`} id="nav-menu">
+          <ul className="nav__list">
+            {navLinks.map((item) => (
+              <li key={item.id} className="nav__item">
+                <a
+                  href={item.href}
+                  className={`nav__link ${activeNav === item.id ? 'active-link' : ''}`}
+                  onClick={() => handleNavClick(item.id)}
                 >
-                  📄 Lihat Curriculum Vitae (CV)
-                </button>
+                  <i className={`uil ${item.icon} nav__icon`}></i>
+                  <span className="nav__name">{item.label}</span>
+                </a>
               </li>
-            </ul>
+            ))}
+            <li className="nav__item nav__item-mobile-cv">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onOpenCv();
+                }}
+                className="nav__link nav__link-btn"
+              >
+                <i className="uil uil-file-alt nav__icon"></i>
+                <span className="nav__name">CV</span>
+              </button>
+            </li>
+          </ul>
+
+          <i
+            className="uil uil-times nav__close"
+            id="nav-close"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Tutup menu"
+          ></i>
+        </div>
+
+        <div className="nav__btns">
+          {/* Theme change button */}
+          <i
+            className={`uil ${isDark ? 'uil-sun' : 'uil-moon'} change-theme`}
+            id="theme-button"
+            onClick={onToggleTheme}
+            title={isDark ? 'Mode Terang' : 'Mode Gelap'}
+            aria-label="Ganti tema warna"
+          ></i>
+
+          <button
+            type="button"
+            onClick={onOpenCv}
+            className="button button--small button--flex nav__cv-btn"
+          >
+            CV <i className="uil uil-file-alt button__icon" style={{ marginLeft: '4px' }}></i>
+          </button>
+
+          <div
+            className="nav__toggle"
+            id="nav-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Buka menu navigasi"
+          >
+            <i className="uil uil-apps"></i>
           </div>
         </div>
-      )}
+      </nav>
     </header>
   );
 }
