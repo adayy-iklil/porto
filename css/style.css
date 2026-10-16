@@ -6,14 +6,14 @@
   --header-height: 4.25rem;
 
   /*========== Colors ==========*/
-  /* Bedimcode Alexa Signature Purple: 250 */
-  --hue-color: 250;
+  /* Signature Crimson Red: 355 */
+  --hue-color: 355;
 
   /* HSL color mode */
-  --first-color: hsl(var(--hue-color), 69%, 61%);
-  --first-color-second: hsl(var(--hue-color), 69%, 61%);
-  --first-color-alt: hsl(var(--hue-color), 57%, 53%);
-  --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
+  --first-color: hsl(var(--hue-color), 82%, 56%);
+  --first-color-second: hsl(var(--hue-color), 82%, 56%);
+  --first-color-alt: hsl(var(--hue-color), 75%, 48%);
+  --first-color-lighter: hsl(var(--hue-color), 92%, 92%);
   --title-color: hsl(var(--hue-color), 8%, 15%);
   --text-color: hsl(var(--hue-color), 8%, 45%);
   --text-color-light: hsl(var(--hue-color), 8%, 65%);
@@ -212,8 +212,8 @@ body.dark-theme .scroll-header {
   bottom: 0;
   left: 0;
   height: 2.5px;
-  background: linear-gradient(90deg, var(--first-color), #8b5cf6, #ec4899);
-  box-shadow: 0 0 10px rgba(106, 89, 209, 0.6);
+  background: linear-gradient(90deg, var(--first-color), #ef4444, #f97316);
+  box-shadow: 0 0 10px rgba(235, 47, 72, 0.6);
   transition: width 0.12s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 10;
   border-radius: 0 2px 2px 0;
@@ -261,15 +261,15 @@ body.dark-theme .scroll-header {
 @keyframes logoPulse {
   0% {
     transform: scale(0.9);
-    box-shadow: 0 0 0 0 rgba(106, 89, 209, 0.65);
+    box-shadow: 0 0 0 0 rgba(235, 47, 72, 0.65);
   }
   70% {
     transform: scale(1.15);
-    box-shadow: 0 0 0 9px rgba(106, 89, 209, 0);
+    box-shadow: 0 0 0 9px rgba(235, 47, 72, 0);
   }
   100% {
     transform: scale(0.9);
-    box-shadow: 0 0 0 0 rgba(106, 89, 209, 0);
+    box-shadow: 0 0 0 0 rgba(235, 47, 72, 0);
   }
 }
 
@@ -343,7 +343,7 @@ body.dark-theme .nav__link::before {
   left: 50%;
   width: 0%;
   height: 2.5px;
-  background: linear-gradient(90deg, var(--first-color), #8b5cf6);
+  background: linear-gradient(90deg, var(--first-color), #ef4444);
   border-radius: 3px;
   transform: translateX(-50%);
   transition: width .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s ease;
@@ -439,12 +439,12 @@ body.dark-theme .nav__theme-btn:hover {
   position: relative;
   overflow: hidden;
   transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease;
-  box-shadow: 0 2px 8px rgba(106, 89, 209, 0.25);
+  box-shadow: 0 2px 8px rgba(235, 47, 72, 0.25);
 }
 
 .nav__cv-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(106, 89, 209, 0.45);
+  box-shadow: 0 6px 18px rgba(235, 47, 72, 0.45);
 }
 
 .nav__cv-btn:active {
@@ -996,7 +996,7 @@ body.dark-theme .home__profile-frame {
 
 body.dark-theme .about__draggable-box.is-dragging .about__img,
 body.dark-theme .home__profile-frame.is-dragging {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, .55), 0 0 30px rgba(106, 89, 209, .4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, .55), 0 0 30px rgba(235, 47, 72, .4);
 }
 
 .about__drag-hint,
