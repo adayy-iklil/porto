@@ -56,7 +56,7 @@ export default function Skills() {
 
       <div className="skills__container container grid">
         {skillGroups.map((group, idx) => {
-          const isOpen = !!openStates[idx];
+          const isOpen = !!openStates[idx]
           return (
             <div
               key={idx}
