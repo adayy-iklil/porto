@@ -1,43 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import StarBackground from './components/StarBackground';
+import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Skills from './components/Skills';
-import Qualification from './components/Qualification';
-import Services from './components/Services';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ScrollUp from './components/ScrollUp';
 import CvModal from './components/CvModal';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [isCvOpen, setIsCvOpen] = useState(false);
-  const [isDark, setIsDark] = useState(() => {
-    const savedTheme = localStorage.getItem('selected-theme');
-    if (savedTheme) {
-      return savedTheme === 'dark';
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
 
   const openCv = () => setIsCvOpen(true);
   const closeCv = () => setIsCvOpen(false);
 
-  // Apply dark-theme class to body
+  // Ensure dark-theme class is active and clean # hashes from URL
   useEffect(() => {
-    if (isDark) {
-      document.body.classList.add('dark-theme');
-      localStorage.setItem('selected-theme', 'dark');
-    } else {
-      document.body.classList.remove('dark-theme');
-      localStorage.setItem('selected-theme', 'light');
-    }
-  }, [isDark]);
+    document.body.classList.add('dark-theme');
 
-  // Remove # (hash) from URL domain bar and support smooth scroll cleanly
-  useEffect(() => {
-    // If user loaded with a hash in the URL, scroll to section and remove hash from address bar
     if (window.location.hash) {
       const hashId = window.location.hash.slice(1);
       const initialTarget =
@@ -46,7 +28,7 @@ export default function App() {
         (hashId === 'portfolio' ? document.getElementById('project') : null);
 
       if (initialTarget) {
-        setTimeout(() => initialTarget.scrollIntoView({ behavior: 'smooth' }), 100);
+        setTimeout(() => initialTarget.scrollIntoView({ behavior: 'smooth' }), 150);
       }
       window.history.replaceState(null, '', window.location.pathname + window.location.search);
     }
@@ -68,7 +50,6 @@ export default function App() {
         e.preventDefault();
         targetElement.scrollIntoView({ behavior: 'smooth' });
 
-        // Ensure hash never appears or remains in the browser address bar
         if (window.location.hash) {
           window.history.replaceState(null, '', window.location.pathname + window.location.search);
         }
@@ -79,30 +60,20 @@ export default function App() {
     return () => document.removeEventListener('click', handleAnchorClick);
   }, []);
 
-  const toggleTheme = () => {
-    setIsDark((prev) => !prev);
-  };
-
   return (
-    <div className="portfolio-app">
-      <Navbar
-        onOpenCv={openCv}
-        isDark={isDark}
-        onToggleTheme={toggleTheme}
-      />
+    <div className="alf-app">
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      <StarBackground />
+      <Navbar onOpenCv={openCv} />
 
-      <main className="main">
+      <main className="alf-main">
         <Hero />
         <About onOpenCv={openCv} />
-        <Skills />
-        <Qualification />
-        <Services />
         <Projects />
         <Contact />
       </main>
 
       <Footer />
-      <ScrollUp />
       <CvModal isOpen={isCvOpen} onClose={closeCv} />
     </div>
   );

@@ -1,96 +1,108 @@
-import React from 'react';
-import { useDraggablePhoto } from '../hooks/useDraggablePhoto';
+import React, { useState, useEffect } from 'react';
+import LanyardCard from './LanyardCard';
+
+const ROLES = [
+  'Fullstack Web Developer',
+  'React & Laravel Enthusiast',
+  'Siswa RPL SMKN 6 Jakarta',
+  'Software & Database Builder',
+];
 
 export default function Hero() {
-  const { isDragging, dragProps } = useDraggablePhoto();
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = ROLES[roleIndex];
+    const typeSpeed = isDeleting ? 38 : 75;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting && displayText.length < currentWord.length) {
+        setDisplayText(currentWord.slice(0, displayText.length + 1));
+      } else if (!isDeleting && displayText.length === currentWord.length) {
+        setTimeout(() => setIsDeleting(true), 1400);
+      } else if (isDeleting && displayText.length > 0) {
+        setDisplayText(currentWord.slice(0, displayText.length - 1));
+      } else if (isDeleting && displayText.length === 0) {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % ROLES.length);
+      }
+    }, typeSpeed);
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, roleIndex]);
 
   return (
-    <section className="home section" id="home">
-      <div className="home__container container grid">
-        <div className="home__content grid">
-          <div className="home__social">
-            <a
-              href="https://www.linkedin.com/in/iklil-badar-4729a8422/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__social-icon"
-              title="LinkedIn"
-            >
-              <i className="uil uil-linkedin-alt"></i>
-            </a>
+    <section className="alf-hero" id="home">
+      <div className="alf-container alf-hero__grid">
+        {/* Left Column */}
+        <div className="alf-hero__content">
+          <h1 className="alf-hero__title">
+            <span className="alf-hero__title-blue">Welcome to</span>
+            <br />
+            <span className="alf-hero__title-white">My Portfolio</span>
+          </h1>
 
-            <a
-              href="https://github.com/adayy-iklil"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__social-icon"
-              title="GitHub"
-            >
-              <i className="uil uil-github-alt"></i>
-            </a>
+          <div className="alf-hero__typewriter" aria-live="polite">
+            <span className="alf-hero__typewriter-text">{displayText}</span>
+            <span className="alf-hero__cursor">|</span>
+          </div>
 
-            <a
-              href="https://www.instagram.com/ikliladay/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__social-icon"
-              title="Instagram"
-            >
-              <i className="uil uil-instagram"></i>
-            </a>
+          <p className="alf-hero__desc">
+            Membangun aplikasi web yang modern, responsif, dan terstruktur dengan
+            mengutamakan performa, kemudahan pemeliharaan kode, serta pengalaman
+            pengguna yang optimal.
+          </p>
 
-            <a
-              href="https://wa.me/6287782390705"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__social-icon"
-              title="WhatsApp"
-            >
-              <i className="uil uil-whatsapp"></i>
+          <div className="alf-hero__actions">
+            <a href="#portfolio" className="alf-btn alf-btn--primary">
+              <span>Lihat Projek</span>
+              <i className="uil uil-arrow-right"></i>
+            </a>
+            <a href="#contact" className="alf-btn alf-btn--outline">
+              <i className="uil uil-user"></i>
+              <span>Hubungi Saya</span>
             </a>
           </div>
 
-          <div className="home__img-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div
-              className={`home__profile-frame ${isDragging ? 'is-dragging' : ''}`}
-              {...dragProps}
-            >
-              <img
-                src="/assets/avatar.jpg"
-                alt="Iklil Badar"
-                className="home__profile-img"
-                draggable="false"
-              />
-            </div>
-            <span className="home__drag-hint">
-              <i className={`uil ${isDragging ? 'uil-smile' : 'uil-arrows-alt'}`}></i>{' '}
-              {isDragging ? 'Wuuush! Jalan-jalan' : 'Tahan & geser foto'}
-            </span>
-          </div>
-
-          <div className="home__data">
-            <h1 className="home__title">Hi, I'm Iklil Badar</h1>
-            <h3 className="home__subtitle">Siswa Rekayasa Perangkat Lunak (RPL)</h3>
-            <p className="home__description">
-              Siswa RPL (Rekayasa Perangkat Lunak) yang memiliki minat di bidang Software Development dan Teknologi Informasi. Berpengalaman mengembangkan website, aplikasi desktop, dan sistem berbasis database melalui berbagai proyek. Memahami dasar software development, database.
-            </p>
-            <div className="home__buttons">
-              <a href="#contact" className="button button--flex">
-                Contact Me <i className="uil uil-message button__icon"></i>
+          <div className="alf-hero__findme">
+            <span className="alf-hero__findme-label">FIND ME</span>
+            <div className="alf-hero__socials">
+              <a
+                href="https://www.instagram.com/ikliladay/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="alf-social-box"
+                aria-label="Instagram"
+              >
+                <i className="uil uil-instagram"></i>
               </a>
-              <a href="#project" className="button button--white button--flex home__button-secondary">
-                View Projects <i className="uil uil-arrow-right button__icon"></i>
+              <a
+                href="https://www.linkedin.com/in/iklil-badar-4729a8422/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="alf-social-box"
+                aria-label="LinkedIn"
+              >
+                <i className="uil uil-linkedin-alt"></i>
+              </a>
+              <a
+                href="https://github.com/adayy-iklil"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="alf-social-box"
+                aria-label="GitHub"
+              >
+                <i className="uil uil-github-alt"></i>
               </a>
             </div>
           </div>
         </div>
 
-        <div className="home__scroll">
-          <a href="#about" className="home__scroll-button button--flex">
-            <i className="uil uil-mouse-alt home__scroll-mouse"></i>
-            <span className="home__scroll-name">Scroll down</span>
-            <i className="uil uil-arrow-down home__scroll-arrow"></i>
-          </a>
+        {/* Right Column: Interactive Hanging Lanyard ID Card */}
+        <div className="alf-hero__lanyard-col">
+          <LanyardCard />
         </div>
       </div>
     </section>
