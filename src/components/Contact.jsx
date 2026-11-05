@@ -4,7 +4,7 @@ const INITIAL_COMMENTS = [
   {
     id: 'pinned-1',
     name: 'iklilbadar_',
-    message: 'Hai! welcome to my portfolio website 👋',
+    message: 'Hai! welcome to my portfolio website',
     date: 'Pinned',
     avatar: '/assets/avatar.jpg',
     isPinned: true,
@@ -23,7 +23,7 @@ export default function Contact() {
   // Right Comment Box State
   const [comments, setComments] = useState(() => {
     try {
-      const saved = localStorage.getItem('iklil_portfolio_comments');
+      const saved = localStorage.getItem('iklil_portfolio_comments_v2');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -42,7 +42,7 @@ export default function Contact() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('iklil_portfolio_comments', JSON.stringify(comments));
+      localStorage.setItem('iklil_portfolio_comments_v2', JSON.stringify(comments));
     } catch (e) {
       // ignore storage quota errors
     }

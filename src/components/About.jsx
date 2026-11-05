@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const PLAYLIST_TRACKS = [
-  { id: 1, title: 'Right Now', artist: 'One Direction', duration: '03:20', seconds: 200 },
-  { id: 2, title: 'Love Story', artist: 'Taylor Swift', duration: '03:55', seconds: 235 },
-  { id: 3, title: 'Payphone', artist: 'Maroon 5', duration: '03:51', seconds: 231 },
-  { id: 4, title: 'Jantung Hati', artist: 'Ghea Indrawari', duration: '04:08', seconds: 248 },
-  { id: 5, title: 'Bernafas Tanpamu', artist: 'Last Child', duration: '04:15', seconds: 255 },
-  { id: 6, title: 'Sekuat Hatimu', artist: 'Last Child', duration: '04:32', seconds: 272 },
-];
+// Silakan isi daftar lagu favorit Anda di dalam array PLAYLIST_TRACKS di bawah ini.
+// Contoh format:
+// { id: 1, title: 'Judul Lagu', artist: 'Nama Artis', duration: '03:30', seconds: 210 }
+const PLAYLIST_TRACKS = [];
 
 function CutoutPortrait({ src, alt }) {
   const canvasRef = useRef(null);
@@ -41,12 +37,9 @@ function CutoutPortrait({ src, alt }) {
           const r = data[idx];
           const g = data[idx + 1];
           const b = data[idx + 2];
-          // Royal blue backdrop has strong B dominance over R and G
           return b > 85 && b - r > 42 && b - g > 18;
         };
 
-        // Flood fill from top, left, and right edges so only outer curtain is removed
-        // (protects school tie & badge inside torso)
         const queue = new Int32Array(total);
         let head = 0;
         let tail = 0;
@@ -91,9 +84,7 @@ function CutoutPortrait({ src, alt }) {
           }
         }
 
-        // Apply transparency and soft edge feathering + bottom fade gradient
         for (let y = 0; y < cropH; y++) {
-          // Bottom vignette fade (last 18% of height fades smoothly to 0)
           const bottomFade =
             y > cropH * 0.8
               ? Math.max(0, 1 - (y - cropH * 0.8) / (cropH * 0.2))
@@ -106,7 +97,6 @@ function CutoutPortrait({ src, alt }) {
             if (visited[pos]) {
               data[pIdx + 3] = 0;
             } else {
-              // Check 2px neighborhood for smooth anti-aliased edge
               let bgNeighbors = 0;
               if (x > 0 && visited[pos - 1]) bgNeighbors++;
               if (x < cropW - 1 && visited[pos + 1]) bgNeighbors++;
@@ -116,8 +106,10 @@ function CutoutPortrait({ src, alt }) {
               let alpha = 255;
               if (bgNeighbors > 0) {
                 alpha = Math.max(40, 255 - bgNeighbors * 60);
-                // Despill blue halo on edge pixels
-                data[pIdx + 2] = Math.min(data[pIdx + 2], Math.floor((data[pIdx] + data[pIdx + 1]) * 0.65));
+                data[pIdx + 2] = Math.min(
+                  data[pIdx + 2],
+                  Math.floor((data[pIdx] + data[pIdx + 1]) * 0.65)
+                );
               }
 
               data[pIdx + 3] = Math.floor(alpha * bottomFade);
@@ -127,7 +119,7 @@ function CutoutPortrait({ src, alt }) {
 
         ctx.putImageData(imgData, 0, 0);
       } catch (e) {
-        // Fallback if canvas security blocks pixel manipulation
+        // Fallback if canvas pixel manipulation is restricted
       }
       setLoaded(true);
     };
@@ -146,19 +138,21 @@ function CutoutPortrait({ src, alt }) {
 }
 
 export default function About({ onOpenCv }) {
-  const [currentTrack, setCurrentTrack] = useState(PLAYLIST_TRACKS[0]);
+  const [currentTrack, setCurrentTrack] = useState(PLAYLIST_TRACKS[0] || null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [elapsed, setElapsed] = useState(42);
+  const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
-    if (!isPlaying) return;
+    if (!isPlaying || !currentTrack) return;
     const timer = setInterval(() => {
       setElapsed((prev) => {
         if (prev + 1 >= currentTrack.seconds) {
-          const nextIdx =
-            (PLAYLIST_TRACKS.findIndex((t) => t.id === currentTrack.id) + 1) %
-            PLAYLIST_TRACKS.length;
-          setCurrentTrack(PLAYLIST_TRACKS[nextIdx]);
+          if (PLAYLIST_TRACKS.length > 0) {
+            const nextIdx =
+              (PLAYLIST_TRACKS.findIndex((t) => t.id === currentTrack.id) + 1) %
+              PLAYLIST_TRACKS.length;
+            setCurrentTrack(PLAYLIST_TRACKS[nextIdx]);
+          }
           return 0;
         }
         return prev + 1;
@@ -168,7 +162,7 @@ export default function About({ onOpenCv }) {
   }, [isPlaying, currentTrack]);
 
   const handleSelectTrack = (track) => {
-    if (track.id === currentTrack.id) {
+    if ( currentTrack && track.id === currentTrack.id) {
       setIsPlaying((prev) => !prev);
     } else {
       setCurrentTrack(track);
@@ -183,6 +177,11 @@ export default function About({ onOpenCv }) {
     return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   };
 
+  const progressPercent =
+    currentTrack && currentTrack.seconds
+      ? Math.min(100, (elapsed / currentTrack.seconds) * 100)
+      : 0;
+
   return (
     <section className="alf-about" id="about">
       <div className="alf-container">
@@ -192,8 +191,7 @@ export default function About({ onOpenCv }) {
           <div className="alf-about__left">
             <h2 className="alf-about__big-title">
               <span className="alf-about__hi">Hi, I&apos;m</span>
-              <span className="alf-about__name-accent">Iklil</span>
-              <span className="alf-about__name-accent">Badar</span>
+              <span className="alf-about__name-accent">Iklil Badar</span>
             </h2>
 
             <a href="#contact" className="alf-about__contact-pill">
@@ -330,7 +328,7 @@ export default function About({ onOpenCv }) {
           </div>
 
           {/*==================== 3. STATS COUNTER ROW ====================*/}
-          <div className="alf-stats-grid">
+          <div className="alf-stats-grid alf-stats-grid--two">
             <a href="#portfolio" className="alf-stat-card">
               <div className="alf-stat-card__top">
                 <span className="alf-stat-card__label">PROJECTS</span>
@@ -347,28 +345,14 @@ export default function About({ onOpenCv }) {
 
             <a href="#portfolio" className="alf-stat-card">
               <div className="alf-stat-card__top">
-                <span className="alf-stat-card__label">CERTIFICATES</span>
+                <span className="alf-stat-card__label">TECH STACK</span>
                 <span className="alf-stat-card__icon">
-                  <i className="uil uil-award"></i>
+                  <i className="uil uil-layer-group"></i>
                 </span>
               </div>
-              <div className="alf-stat-card__number">3</div>
+              <div className="alf-stat-card__number">12</div>
               <div className="alf-stat-card__foot">
-                <span>Sertifikat pelatihan &amp; kompetensi teknologi</span>
-                <i className="uil uil-arrow-up-right"></i>
-              </div>
-            </a>
-
-            <a href="#portfolio" className="alf-stat-card">
-              <div className="alf-stat-card__top">
-                <span className="alf-stat-card__label">AWARDS</span>
-                <span className="alf-stat-card__icon">
-                  <i className="uil uil-trophy"></i>
-                </span>
-              </div>
-              <div className="alf-stat-card__number">2</div>
-              <div className="alf-stat-card__foot">
-                <span>Pencapaian proyek industri &amp; inovasi sekolah</span>
+                <span>Bahasa pemrograman, framework &amp; database yang dikuasai</span>
                 <i className="uil uil-arrow-up-right"></i>
               </div>
             </a>
@@ -406,12 +390,10 @@ export default function About({ onOpenCv }) {
                     <div className="alf-spotify-card__bar">
                       <div
                         className="alf-spotify-card__bar-fill"
-                        style={{
-                          width: `${Math.min(100, (elapsed / currentTrack.seconds) * 100)}%`,
-                        }}
+                        style={{ width: `${progressPercent}%` }}
                       />
                     </div>
-                    <span>{currentTrack.duration}</span>
+                    <span>{currentTrack ? currentTrack.duration : '00:00'}</span>
                   </div>
                 </div>
 
@@ -423,7 +405,12 @@ export default function About({ onOpenCv }) {
                   <button
                     type="button"
                     className="alf-spotify-card__play-btn"
-                    onClick={() => setIsPlaying((prev) => !prev)}
+                    onClick={() => {
+                      if (PLAYLIST_TRACKS.length > 0) {
+                        if (!currentTrack) setCurrentTrack(PLAYLIST_TRACKS[0]);
+                        setIsPlaying((prev) => !prev);
+                      }
+                    }}
                     aria-label={isPlaying ? 'Pause' : 'Play'}
                   >
                     <i className={`uil ${isPlaying ? 'uil-pause' : 'uil-play'}`}></i>
@@ -433,34 +420,42 @@ export default function About({ onOpenCv }) {
 
               {/* Tracklist */}
               <div className="alf-spotify-card__tracks">
-                {PLAYLIST_TRACKS.map((track, idx) => {
-                  const isActive = track.id === currentTrack.id;
-                  return (
-                    <button
-                      key={track.id}
-                      type="button"
-                      onClick={() => handleSelectTrack(track)}
-                      className={`alf-spotify-track ${isActive ? 'is-active' : ''}`}
-                    >
-                      <span className="alf-spotify-track__num">
-                        {isActive && isPlaying ? (
-                          <span className="alf-eq-bars">
-                            <i />
-                            <i />
-                            <i />
-                          </span>
-                        ) : (
-                          idx + 1
-                        )}
-                      </span>
-                      <span className="alf-spotify-track__info">
-                        <strong>{track.title}</strong>
-                        <small>{track.artist}</small>
-                      </span>
-                      <span className="alf-spotify-track__dur">{track.duration}</span>
-                    </button>
-                  );
-                })}
+                {PLAYLIST_TRACKS.length === 0 ? (
+                  <div className="alf-spotify-empty">
+                    Belum ada lagu yang ditambahkan.
+                  </div>
+                ) : (
+                  PLAYLIST_TRACKS.map((track, idx) => {
+                    const isActive = currentTrack && track.id === currentTrack.id;
+                    return (
+                      <button
+                        key={track.id}
+                        type="button"
+                        onClick={() => handleSelectTrack(track)}
+                        className={`alf-spotify-track ${isActive ? 'is-active' : ''}`}
+                      >
+                        <span className="alf-spotify-track__num">
+                          {isActive && isPlaying ? (
+                            <span className="alf-eq-bars">
+                              <i />
+                              <i />
+                              <i />
+                            </span>
+                          ) : (
+                            idx + 1
+                          )}
+                        </span>
+                        <span className="alf-spotify-track__info">
+                          <strong>{track.title}</strong>
+                          <small>{track.artist}</small>
+                        </span>
+                        <span className="alf-spotify-track__dur">
+                          {track.duration}
+                        </span>
+                      </button>
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>

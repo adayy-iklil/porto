@@ -67,54 +67,6 @@ const PROJECTS_DATA = [
   },
 ];
 
-const CERTIFICATES_DATA = [
-  {
-    id: 1,
-    title: 'AI Workshop — Artificial Intelligence Fundamentals',
-    issuer: 'Merkle Innovation',
-    date: 'Juni 2026',
-    badge: 'Artificial Intelligence',
-    desc: 'Pelatihan intensif mengenai konsep dasar Artificial Intelligence serta implementasi AI tools dalam alur kerja rekayasa perangkat lunak.',
-  },
-  {
-    id: 2,
-    title: 'Frontend Web Developer — Production Project',
-    issuer: 'PT. Ace Service Energy',
-    date: 'Juli 2026',
-    badge: 'React.js Engineering',
-    desc: 'Sertifikasi kontribusi pengembangan dan peluncuran website perusahaan energi surya berbasis React.js.',
-  },
-  {
-    id: 3,
-    title: 'Kompetensi Rekayasa Perangkat Lunak (Web & Database)',
-    issuer: 'SMK Negeri 6 Jakarta',
-    date: '2025 - 2026',
-    badge: 'Fullstack Development',
-    desc: 'Penguasaan pengembangan aplikasi web menggunakan HTML, CSS, JavaScript, PHP, Laravel, serta perancangan database MySQL.',
-  },
-];
-
-const ACHIEVEMENTS_DATA = [
-  {
-    id: 1,
-    title: 'Production Deployment — ADOM Scoring & E-Ticketing',
-    org: 'Adom Scoring Official Platform',
-    year: 'Agustus 2025',
-    highlight: 'Real-World System',
-    desc: 'Berhasil membangun, mengintegrasikan RESTful API, dan men-deploy sistem e-ticketing serta penilaian kompetisi hingga digunakan langsung di tahap produksi.',
-    image: '/assets/adomscoring.png',
-  },
-  {
-    id: 2,
-    title: 'Lead Frontend Developer — Ace Energy Service Website',
-    org: 'PT. Ace Service Energy',
-    year: 'Juli 2026',
-    highlight: 'Industry Collaboration',
-    desc: 'Dipercaya merancang dan mengimplementasikan antarmuka web profil perusahaan energi surya dengan performa tinggi dan desain responsif.',
-    image: '/assets/ace.png',
-  },
-];
-
 const TECH_STACK_DATA = [
   {
     name: 'HTML',
@@ -195,7 +147,6 @@ export default function Projects() {
       <span id="project" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }} />
 
       <div className="alf-container">
-        {/* If a project is clicked, show the video's Project Detail View (00:38 - 00:42) */}
         {selectedProject ? (
           <div className="alf-proj-detail">
             {/* Top Back & Breadcrumb Bar */}
@@ -298,13 +249,12 @@ export default function Projects() {
             <div className="alf-section-head">
               <h2 className="alf-section-head__title">Portfolio</h2>
               <p className="alf-section-head__sub">
-                Menampilkan proyek pilihan, sertifikasi, pencapaian, serta tech
-                stack yang saya kuasai.
+                Menampilkan proyek pilihan serta teknologi yang saya gunakan.
               </p>
             </div>
 
-            {/* 4 Switchable Tabs Bar (Projects, Certificates, Achievements, Tech Stack) */}
-            <div className="alf-tabs-bar" role="tablist">
+            {/* 2 Switchable Tabs Bar (Projects & Tech Stack) */}
+            <div className="alf-tabs-bar alf-tabs-bar--two" role="tablist">
               <button
                 type="button"
                 role="tab"
@@ -314,28 +264,6 @@ export default function Projects() {
               >
                 <i className="uil uil-brackets-curly"></i>
                 <span>Projects</span>
-              </button>
-
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === 'certificates'}
-                onClick={() => setActiveTab('certificates')}
-                className={`alf-tab-btn ${activeTab === 'certificates' ? 'is-active' : ''}`}
-              >
-                <i className="uil uil-award"></i>
-                <span>Certificates</span>
-              </button>
-
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === 'achievements'}
-                onClick={() => setActiveTab('achievements')}
-                className={`alf-tab-btn ${activeTab === 'achievements' ? 'is-active' : ''}`}
-              >
-                <i className="uil uil-trophy"></i>
-                <span>Achievements</span>
               </button>
 
               <button
@@ -402,63 +330,7 @@ export default function Projects() {
               </div>
             )}
 
-            {/* TAB 2: CERTIFICATES */}
-            {activeTab === 'certificates' && (
-              <div className="alf-certs-grid">
-                {CERTIFICATES_DATA.map((cert) => (
-                  <div key={cert.id} className="alf-cert-card">
-                    <div className="alf-cert-card__preview">
-                      <div className="alf-cert-card__sheet">
-                        <div className="alf-cert-card__seal">
-                          <i className="uil uil-award"></i>
-                        </div>
-                        <span className="alf-cert-card__sheet-top">
-                          CERTIFICATE OF COMPLETION
-                        </span>
-                        <h4>{cert.title}</h4>
-                        <p>Presented to Iklil Badar</p>
-                        <div className="alf-cert-card__sheet-foot">
-                          <span>{cert.issuer}</span>
-                          <span>{cert.date}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="alf-cert-card__body">
-                      <span className="alf-cert-card__badge">{cert.badge}</span>
-                      <h3 className="alf-cert-card__title">{cert.title}</h3>
-                      <p className="alf-cert-card__desc">{cert.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* TAB 3: ACHIEVEMENTS */}
-            {activeTab === 'achievements' && (
-              <div className="alf-certs-grid">
-                {ACHIEVEMENTS_DATA.map((item) => (
-                  <div key={item.id} className="alf-cert-card">
-                    <div className="alf-project-card__img-wrap">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="alf-project-card__img"
-                      />
-                    </div>
-                    <div className="alf-cert-card__body">
-                      <span className="alf-cert-card__badge">
-                        {item.highlight} • {item.year}
-                      </span>
-                      <h3 className="alf-cert-card__title">{item.title}</h3>
-                      <p className="alf-cert-card__desc">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* TAB 4: TECH STACK */}
+            {/* TAB 2: TECH STACK */}
             {activeTab === 'techstack' && (
               <div className="alf-tech-grid">
                 {TECH_STACK_DATA.map((tech) => (
