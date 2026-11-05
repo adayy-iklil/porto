@@ -13,7 +13,7 @@ export default function Footer() {
           {/* Col 1: Brand */}
           <div className="alf-footer__brand">
             <a href="#home" className="alf-footer__logo">
-              Iklil<span className="text-blue">.Dev</span>
+              Iklil<span className="text-blue"> Badar </span>
             </a>
             <p className="alf-footer__desc">
               Terima kasih telah mengunjungi portofolio saya. Mari berkolaborasi
